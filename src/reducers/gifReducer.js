@@ -1,24 +1,21 @@
 import {
   RECEIVE_GIF,
   ERROR_GIF
-} from "../actions"
+} from "../actions/types"
 
 
 const INIT_STATE = {
-  currentGif: null,
+  currentGif: "",
   gifError: ""
 }
 
-const newState = (state, property, payload) => {
-  return Object.assign({}, state, { [property]: payload })
-}
 
 const GifReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case RECEIVE_GIF:
-      return newState(state, "currentGif", action.payload)
+      return { ...state, currentGif: action.payload }
     case ERROR_GIF:
-      return newState(state, "gifError", action.payload)
+      return { ...state, gifError: action.payload }
     default:
       return state
   }

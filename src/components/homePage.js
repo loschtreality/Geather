@@ -25,17 +25,17 @@ class HomePage extends Component {
   render() {
     const {
       container,
-      gifStyle
+      gifStyle,
+      textStyle
      } = styles
 
-     debugger
     return (
       <View style={container}>
         <View>
-          <Image source={this.props.currentGif} style={gifStyle} />
+          <Image source={{ uri: this.props.currentGif }} style={gifStyle} />
         </View>
-        <Text> The gif image goes above here </Text>
-        <Text>{this.props.gifError}</Text>
+        <Text style={textStyle}> The gif image goes above here </Text>
+        <Text style={[textStyle, { color: "red"}]} > { this.props.gifError } </Text>
       </View>
     )
   }
@@ -43,7 +43,7 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: 200,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center"
@@ -51,6 +51,10 @@ const styles = StyleSheet.create({
   gifStyle: {
     height: 50,
     width: 50
+  },
+  textStyle: {
+    marginTop: 20,
+    color: "blue"
   }
 })
 
