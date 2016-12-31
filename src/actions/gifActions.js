@@ -31,10 +31,10 @@ export const getGif = (url, params = {}) => {
     return (dispatch) => {
         fetchContentData(url, params)
         .then(result => {
-          const embeddedURL = result.data[0].embed_url
-          dispatch(fetchGifSuccess(embeddedURL))
+          const gifURL = result.data[0].images.fixed_height.url
+          dispatch(fetchGifSuccess(gifURL))
         })
-        .catch(err => dispatch(fetchGifFail(err)))
+        .catch(err => dispatch(fetchGifFail(`${err.name}: ${err.message}`)))
     }
 }
 

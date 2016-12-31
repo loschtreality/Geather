@@ -29,13 +29,14 @@ class HomePage extends Component {
       textStyle
      } = styles
 
+     debugger
     return (
       <View style={container}>
-        <View>
+        <View style={{ borderBottomWidth: 1, borderStyle: "solid" }}>
           <Image source={{ uri: this.props.currentGif }} style={gifStyle} />
         </View>
-        <Text style={textStyle}> The gif image goes above here </Text>
-        <Text style={[textStyle, { color: "red"}]} > { this.props.gifError } </Text>
+        <Text style={textStyle}> The gif image goes here </Text>
+        <Text style={[textStyle, { color: "red"}] } >{ this.props.gifError }</Text>
       </View>
     )
   }
@@ -43,14 +44,14 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 200,
+    marginTop: 250,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center"
   },
   gifStyle: {
-    height: 50,
-    width: 50
+    height: 75,
+    width: 75
   },
   textStyle: {
     marginTop: 20,
