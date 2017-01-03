@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 import {
   StyleSheet,
   View,
-  Image,
   ScrollView
 } from "react-native"
 
@@ -13,7 +12,8 @@ import {
 import {
   Spinner,
   WeatherStats,
-  CityCard
+  CityCard,
+  GifElement
 } from "./shared"
 
 
@@ -27,18 +27,16 @@ class HomePage extends Component {
 
   componentWillMount() {
     //TODO: Fetch Weather, then gif with preference parameters
-    this.props.getGif("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC")
+    this.props.getGif("http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=happy+fun")
   }
 
   // Render Gif or Spinner
   renderGif() {
     if (this.props.currentGif) {
       return (
-          <Image
-            source={{ uri: this.props.currentGif }}
-            style={styles.gifStyle}
-            resizeMode="cover"
-          />
+        <GifElement
+          currentGif={this.props.currentGif}
+        />
       )
     }
     return (
@@ -49,19 +47,17 @@ class HomePage extends Component {
   render() {
     const {
       container,
-      gifContainer
      } = styles
 
 
      // NOTE: Static cities will be replaced with data from database
+     // TODO: Change cities container to <ListView/>
 
     return (
       <ScrollView contentContainerStyle={container} >
-        <View style={gifContainer}>
           { this.renderGif() }
-        </View>
 
-        <WeatherStats />
+        <WeatherStats city="San Francisco" temperature="75" humidity="50%" />
 
         <View style={{ flex: 1, }}>
           {[
@@ -85,18 +81,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center"
-  },
-  gifContainer: {
-    flex: 2
-  },
-  gifStyle: {
-    flex: 1,
-    height: null,
-    width: null,
-  },
-  textStyle: {
-    marginTop: 20,
-    color: "blue"
   }
 })
 

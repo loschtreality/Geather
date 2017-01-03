@@ -2,16 +2,19 @@ import React from "react"
 import {
   View,
   StyleSheet,
-  Text
+  Text,
 } from "react-native"
 
 
-const WeatherStats = () => {
+const WeatherStats = (props) => {
   const {
     container,
     tempContainer,
     temperatureNumber,
-    extraData
+    statsContainer,
+    statsText,
+    cityText,
+    cityContainer
   } = styles
 
 
@@ -19,17 +22,22 @@ const WeatherStats = () => {
   return (
     <View style={container}>
       <View style={tempContainer}>
-        <Text style={temperatureNumber}>75 degrees</Text>
+        <Text style={temperatureNumber}> {`${props.temperature}°F`} </Text>
       </View>
 
-      <Text style={extraData}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-        officia deserunt mollit anim id est laborum.
-      </Text>
+      <View style={cityContainer}>
+        <Text style={cityText}>{ props.city }</Text>
+      </View>
+
+      <View style={statsContainer}>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <Text style={statsText}>Humidity: { props.humidity } </Text>
+      </View>
     </View>
   )
 }
@@ -47,11 +55,24 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   temperatureNumber: {
-    fontSize: 18,
+    fontSize: 42,
     color: "white"
   },
-  extraData: {
-    color: "green"
+  statsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  statsText: {
+    color: "cyan"
+  },
+  cityText: {
+    fontSize: 30,
+    color: "magenta"
+  },
+  cityContainer: {
+    alignItems: "center"
   }
 })
 

@@ -31,7 +31,7 @@ export const getGif = (url, params = {}) => {
     return (dispatch) => {
         fetchContentData(url, params)
         .then(result => {
-          const gifURL = result.data[0].images.fixed_height.url
+          const gifURL = result.data.fixed_height_downsampled_url
           dispatch(fetchGifSuccess(gifURL))
         })
         .catch(err => dispatch(fetchGifFail(`${err.name}: ${err.message}`)))
