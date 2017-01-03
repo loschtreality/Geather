@@ -3,11 +3,18 @@ import { connect } from "react-redux"
 
 
 import {
-  Text,
   StyleSheet,
   View,
-  Image
+  Image,
+  ScrollView
 } from "react-native"
+
+
+import {
+  Spinner,
+  WeatherStats,
+  CityCard
+} from "./shared"
 
 
 import { getGif } from "../actions"
@@ -19,39 +26,73 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
+    //TODO: Fetch Weather, then gif with preference parameters
     this.props.getGif("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC")
+  }
+
+  // Render Gif or Spinner
+  renderGif() {
+    if (this.props.currentGif) {
+      return (
+          <Image
+            source={{ uri: this.props.currentGif }}
+            style={styles.gifStyle}
+            resizeMode="cover"
+          />
+      )
+    }
+    return (
+      <Spinner />
+    )
   }
 
   render() {
     const {
       container,
-      gifStyle,
-      textStyle
+      gifContainer
      } = styles
 
-     debugger
+
+     // NOTE: Static cities will be replaced with data from database
+
     return (
-      <View style={container}>
-        <View style={{ borderBottomWidth: 1, borderStyle: "solid" }}>
-          <Image source={{ uri: this.props.currentGif }} style={gifStyle} />
+      <ScrollView contentContainerStyle={container} >
+        <View style={gifContainer}>
+          { this.renderGif() }
         </View>
-        <Text style={textStyle}> The gif image goes here </Text>
-        <Text style={[textStyle, { color: "red"}] } >{ this.props.gifError }</Text>
-      </View>
+
+        <WeatherStats />
+
+        <View style={{ flex: 1, }}>
+          {[
+          "San Francisco",
+          "Los Angeles",
+          "New York",
+          "Boston",
+          "Paris"
+        ].map((city, idx) => {
+          return (<CityCard city={city} key={idx} />)
+        })}
+        </View>
+      </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 250,
+    marginTop: 60,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center"
   },
+  gifContainer: {
+    flex: 2
+  },
   gifStyle: {
-    height: 75,
-    width: 75
+    flex: 1,
+    height: null,
+    width: null,
   },
   textStyle: {
     marginTop: 20,

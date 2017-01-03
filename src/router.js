@@ -11,7 +11,7 @@ const RouterComponent = () => {
         navigationBarStyle={styles.viewStyle}
         titleStyle={{ color: "magenta" }}
       >
-        <Scene key="landing" component={HomePage} title="Home" />
+        <Scene key="landing" component={HomePage} title="Geather" />
       </Scene>
     </Router>
   )
