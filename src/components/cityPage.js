@@ -1,26 +1,18 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// import { Actions } from "react-native-router-flux"
-
 import {
-  StyleSheet,
   View,
-  ScrollView
 } from "react-native"
 
-
 import {
-  Spinner,
+  GifElement,
   WeatherStats,
-  CityCard,
-  GifElement
+  Spinner,
 } from "./shared"
-
 
 import { getGif } from "../actions"
 
-
-class HomePage extends Component {
+class CityPage extends Component {
   constructor(props) {
     super(props)
   }
@@ -46,44 +38,28 @@ class HomePage extends Component {
 
   render() {
     const {
-      container,
-     } = styles
-
-
-     // NOTE: Static cities will be replaced with data from database
-     // TODO: Change cities container to <ListView/>
+      container
+    } = styles
 
     return (
-      <ScrollView contentContainerStyle={container} >
-          { this.renderGif() }
+      <View style={container}>
+        { this.renderGif() }
+        <WeatherStats temperature="72" city="New York" humidity="30%" />
 
-        <WeatherStats city="San Francisco" temperature="75" humidity="50%" />
-
-        <View style={{ flex: 1, }}>
-          {[
-          "San Francisco",
-          "Los Angeles",
-          "New York",
-          "Boston",
-          "Paris"
-        ].map((city, idx) => {
-          return (<CityCard city={city} key={idx} />)
-        })}
-        </View>
-      </ScrollView>
+      </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     marginTop: 60,
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
+    backgroundColor: "black"
   }
-})
-
+}
 
 const mapStateToProps = (state) => {
   return ({
@@ -99,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default connect(mapStateToProps, mapDispatchToProps)(CityPage)

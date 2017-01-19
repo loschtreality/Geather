@@ -22,7 +22,7 @@ const CityCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    padding: 10,
     backgroundColor: "skyblue",
     justifyContent: "flex-start",
     flexDirection: "row",

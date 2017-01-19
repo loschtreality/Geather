@@ -30,13 +30,16 @@ const WeatherStats = (props) => {
       </View>
 
       <View style={statsContainer}>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
-        <Text style={statsText}>Humidity: { props.humidity } </Text>
+        <View>
+          <Text style={statsText}>Humidity: { props.humidity } </Text>
+          <Text style={statsText}>Humidity: { props.humidity } </Text>
+          <Text style={statsText}>Humidity: { props.humidity } </Text>
+        </View>
+        <View>
+          <Text style={statsText}>Humidity: { props.humidity } </Text>
+          <Text style={statsText}>Humidity: { props.humidity } </Text>
+          <Text style={statsText}>Humidity: { props.humidity } </Text>
+        </View>
       </View>
     </View>
   )
@@ -55,17 +58,18 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   temperatureNumber: {
-    fontSize: 42,
+    fontSize: 58,
     color: "white"
   },
   statsContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-around"
   },
   statsText: {
-    color: "cyan"
+    color: "cyan",
+    margin: 3
   },
   cityText: {
     fontSize: 30,
