@@ -2,18 +2,17 @@ import React from "react"
 import {
   View,
   StyleSheet,
-  Text
+  Text,
 } from "react-native"
-
 
 const CityCard = (props) => {
     const {
-      container
+      container,
     } = styles
 
     return (
-      <View style={container}>
-        <Text>
+      <View style={container} >
+        <Text onPress={() => props.navigate(props.city)}>
           { props.city }
         </Text>
       </View>
@@ -27,6 +26,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     flexDirection: "row",
     position: "relative"
+  },
+  button: {
+    backgroundColor: "green"
   }
 })
 

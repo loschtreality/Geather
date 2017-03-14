@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// import { Actions } from "react-native-router-flux"
+import { Actions } from "react-native-router-flux"
 
 import {
   StyleSheet,
   View,
-  ScrollView
+  ScrollView,
 } from "react-native"
 
 
@@ -23,11 +23,19 @@ import { getGif } from "../actions"
 class HomePage extends Component {
   constructor(props) {
     super(props)
+
+    this.changeScene = this.changeScene.bind(this)
   }
 
   componentWillMount() {
     //TODO: Fetch Weather, then gif with preference parameters
     this.props.getGif("http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=happy+fun+summer")
+  }
+
+  changeScene(city) {
+    return function () {
+      Actions.selectedCity({ city })
+    }
   }
 
   // Render Gif or Spinner to avoid spacing and undefined error from async
@@ -59,7 +67,7 @@ class HomePage extends Component {
 
         <WeatherStats city="San Francisco" temperature="75" humidity="50%" />
 
-        <View style={{ flex: 1, }}>
+        <ScrollView style={{ flex: 1, }}>
           {[
           "San Francisco",
           "Los Angeles",
@@ -67,10 +75,10 @@ class HomePage extends Component {
           "Boston",
           "Paris"
         ].map((city, idx) => {
-          return (<CityCard city={city} key={idx} />)
+          return (<CityCard city={city} key={idx} navigate={this.changeScene(city)} />)
         })}
-        </View>
       </ScrollView>
+    </ScrollView>
     )
   }
 }
@@ -88,15 +96,17 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return ({
     currentGif: state.gif.currentGif,
-    gifError: state.gif.gifError
+    gifError: state.gif.gifError,
+    routes: state.routes
   })
 }
 
 //TODO: Add cities dispatch
 const mapDispatchToProps = (dispatch) => {
   return ({
-    getGif: (url, params = {}) => dispatch(getGif(url, params))
+    getGif: (url, params = {}) => dispatch(getGif(url, params)),
   })
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

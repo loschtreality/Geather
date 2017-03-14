@@ -44,7 +44,7 @@ class CityPage extends Component {
     return (
       <View style={container}>
         { this.renderGif() }
-        <WeatherStats temperature="72" city="New York" humidity="30%" />
+        <WeatherStats temperature="72" city={this.props.city} humidity="30%" />
 
       </View>
     )
