@@ -12,10 +12,7 @@ import { Input, Spinner } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
 
-<<<<<<< HEAD
-=======
 // TODO: Facebook login
->>>>>>> user_auth
 
 class LoginForm extends Component {
   onEmailChange(text) {
@@ -43,7 +40,6 @@ class LoginForm extends Component {
 
 
   render() {
-    debugger
     const {
       container,
       imageStyle,
