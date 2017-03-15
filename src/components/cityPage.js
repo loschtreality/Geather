@@ -41,6 +41,7 @@ class CityPage extends Component {
       container
     } = styles
 
+    debugger
     return (
       <View style={container}>
         { this.renderGif() }
@@ -64,7 +65,7 @@ const styles = {
 const mapStateToProps = (state) => {
   return ({
     currentGif: state.gif.currentGif,
-    gifError: state.gif.gifError
+    gifError: state.gif.gifError,
   })
 }
 

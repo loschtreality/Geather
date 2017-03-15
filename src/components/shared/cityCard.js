@@ -12,7 +12,7 @@ const CityCard = (props) => {
 
     return (
       <View style={container} >
-        <Text onPress={() => props.navigate(props.city)}>
+        <Text onPress={() => props.navigate({ city: props.city })}>
           { props.city }
         </Text>
       </View>

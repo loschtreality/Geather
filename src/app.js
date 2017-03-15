@@ -3,6 +3,8 @@ import { Provider, connect } from "react-redux"
 import { createStore, applyMiddleware, compose } from "redux"
 import ReduxThunk from "redux-thunk"
 import { Router, Scene } from "react-native-router-flux"
+import firebase from "firebase"
+import { firebaseConfig } from "../envVariables"
 import RootReducer from "./reducers/rootReducer"
 
 import HomePage from "./components/homePage"
@@ -11,6 +13,10 @@ import CityPage from "./components/cityPage"
 const RouterWithRedux = connect()(Router)
 
 class App extends Component {
+
+  componentWillMount() {
+    firebase.initializeApp(firebaseConfig)
+  }
 
   render() {
     const store = compose(
