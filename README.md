@@ -9,3 +9,17 @@ Geather is a React-Native, Android & IOS weather app which utilizes the Giphy AP
 - Redux Thunk
 - Fetch API
 - React-Native-Router-Flux
+
+## Development
+
+Follow the steps below to run this project locally:
+
+1. Follow the React Native installation guide
+2. Download the Android Studio SKD for Android development
+3. Download Yarn and `yarn install`
+4. Create a file named `envVariables.js` in the root of the project
+
+
+## Todo
+- [ ] Open WeatherMaps API
+- [ ] oAuth for Facebook
