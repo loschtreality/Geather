@@ -7,6 +7,7 @@ import firebase from "firebase"
 import { firebaseConfig } from "../envVariables"
 import RootReducer from "./reducers/rootReducer"
 
+import LoginForm from "./components/loginForm"
 import HomePage from "./components/homePage"
 import CityPage from "./components/cityPage"
 
@@ -24,13 +25,17 @@ class App extends Component {
     )
     return (
       <Provider store={store}>
-        <RouterWithRedux>
+        <RouterWithRedux sceneStyle={{ paddingTop: 65 }}>
+          <Scene key="auth">
+            <Scene key="login" component={LoginForm} title="Please Login" />
+          </Scene>
+
           <Scene
             key="main"
             navigationBarStyle={styles.viewStyle}
             titleStyle={{ color: "magenta" }}
           >
-            <Scene key="landing" component={HomePage} title="Geather" inital />
+            <Scene key="landing" component={HomePage} title="Geather" initial />
             <Scene key="selectedCity" component={CityPage} />
           </Scene>
         </RouterWithRedux>

@@ -41,7 +41,6 @@ class CityPage extends Component {
       container
     } = styles
 
-    debugger
     return (
       <View style={container}>
         { this.renderGif() }
@@ -70,10 +69,10 @@ const mapStateToProps = (state) => {
 }
 
 //TODO: Add cities dispatch
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    getGif: (url, params = {}) => dispatch(getGif(url, params))
-  })
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return ({
+//     // getGif: (url, params = {}) => dispatch(getGif(url, params))
+//   })
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CityPage)
+export default connect(mapStateToProps, { getGif })(CityPage)
