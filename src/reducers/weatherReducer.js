@@ -1,9 +1,21 @@
-const WeatherReducer = (state = {}, action) => {
+import {
+  RECEIVE_WEATHER,
+  ERROR_WEATHER
+} from "../actions/types"
+
+const INIT_STATE = {
+  currentWeather: {},
+  weatherError: ""
+}
+
+const WeatherReducer = (state = INIT_STATE, action) => {
   Object.freeze(state)
   // option to use Object.assign({}, state, { payload })
   switch (action.type) {
-    case "receive_weather":
-      return { ...state, action: action.payload }
+    case RECEIVE_WEATHER:
+      return { ...state, currentWeather: action.payload }
+    case ERROR_WEATHER:
+      return { ...state, weatherError: action.payload }
     default:
       return state
   }

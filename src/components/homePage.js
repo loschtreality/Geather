@@ -4,7 +4,6 @@ import { Actions } from "react-native-router-flux"
 
 import {
   StyleSheet,
-  View,
   ScrollView,
 } from "react-native"
 
@@ -17,7 +16,8 @@ import {
 } from "./shared"
 
 
-import { getGif } from "../actions"
+import { giphyURL, openWeatherURL } from "../utils"
+import { getGif, getWeather } from "../actions"
 
 
 class HomePage extends Component {
@@ -28,8 +28,10 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    //TODO: Fetch Weather, then gif with preference parameters
-    this.props.getGif("http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=happy+fun+summer")
+    //TODO: refactor to function calls instead of direct url strings
+    console.log(`${openWeatherURL}&q=London,uk`, "WEATHER URL")
+    this.props.getGif(`${giphyURL}&tag=summer`)
+    this.props.getWeather(`${openWeatherURL}&q=London,uk`)
   }
 
   changeScene(city) {
@@ -57,22 +59,28 @@ class HomePage extends Component {
       container,
      } = styles
 
+     const {
+       temp,
+       humidity
+     } = this.props.currentWeather
 
      // NOTE: Static cities will be replaced with data from database
      // TODO: Change cities container to <ListView/>
-
     return (
       <ScrollView contentContainerStyle={container} >
           { this.renderGif() }
 
-        <WeatherStats city="San Francisco" temperature="75" humidity="50%" />
+        <WeatherStats
+          city="London"
+          temperature={Math.round(temp) || ""}
+          humidity={humidity}
+        />
 
         <ScrollView style={{ flex: 1, }}>
           {[
-          "San Francisco",
           "Los Angeles",
           "New York",
-          "Boston",
+          "San Francisco",
           "Paris"
         ].map((city, idx) => {
           return (<CityCard city={city} key={idx} navigate={this.changeScene(city)} />)
@@ -85,7 +93,6 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 60,
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
@@ -97,16 +104,19 @@ const mapStateToProps = (state) => {
   return ({
     currentGif: state.gif.currentGif,
     gifError: state.gif.gifError,
-    routes: state.routes
+    routes: state.routes,
+    currentWeather: state.weather.currentWeather,
+    weatherError: state.weather.weatherError
   })
 }
 
 //TODO: Add cities dispatch
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    getGif: (url, params = {}) => dispatch(getGif(url, params)),
-  })
-}
+// const mapDispatchToProps = () => {
+//   return ({
+//     getGif,
+//     getWeather
+//   })
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default connect(mapStateToProps, { getGif, getWeather })(HomePage)

@@ -23,12 +23,12 @@ class App extends Component {
     const store = compose(
       applyMiddleware(ReduxThunk)(createStore)(RootReducer)
     )
+    // <Scene key="auth">
+    //   <Scene key="login" component={LoginForm} title="Please Login" />
+    // </Scene>
     return (
       <Provider store={store}>
         <RouterWithRedux sceneStyle={{ paddingTop: 65 }}>
-          <Scene key="auth">
-            <Scene key="login" component={LoginForm} title="Please Login" />
-          </Scene>
 
           <Scene
             key="main"

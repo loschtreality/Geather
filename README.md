@@ -30,12 +30,16 @@ export const firebaseConfig = {
    messagingSenderId: (info)
 }
 
-export const openWeatherConfig = {}
+export const openWeatherConfig = {
+  apiKey: (key)
+}
 
 ```
 
 
 ## Todo
+- [x] Giphy Api
 - [ ] Open WeatherMaps API
+- [ ] Control fetching for components
+- [ ] DB persistence
 - [ ] oAuth for Facebook
-- [ ] Material Components

@@ -3,27 +3,7 @@ import {
   ERROR_GIF
  } from "./types"
 
-
-// Fetch function helpers
-const checkStatus = (response) => {
-    if (response.status === 200) {
-        return Promise.resolve(response)
-    }
-    return Promise.reject(
-        new Error(response.statusText))
-}
-
-const getJSON = (response) => {
-  return response.json()
-}
-
-// Gif API methods
-
-const fetchContentData = (url, options = {}) => {
-  return fetch(url, options)
-  .then(checkStatus)
-  .then(getJSON)
-}
+import { fetchContentData } from "../utils"
 
 // Gif Dispatching and Actions
 
