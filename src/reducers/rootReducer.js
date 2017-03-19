@@ -3,12 +3,14 @@ import WeatherReducer from "./weatherReducer"
 import GifReducer from "./gifReducer"
 import SceneReducer from "./sceneReducer"
 import AuthReducer from "./authReducer"
+import ProfileReducer from "./profileReducer"
 
 const RootReducer = combineReducers({
+  routes: SceneReducer,
   auth: AuthReducer,
-  weather: WeatherReducer,
   gif: GifReducer,
-  routes: SceneReducer
+  weather: WeatherReducer,
+  profile: ProfileReducer
 })
 
 export default RootReducer

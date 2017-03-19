@@ -10,6 +10,7 @@ import RootReducer from "./reducers/rootReducer"
 import LoginForm from "./components/loginForm"
 import HomePage from "./components/homePage"
 import CityPage from "./components/cityPage"
+import ProfilePage from "./components/profilePage"
 
 const RouterWithRedux = connect()(Router)
 
@@ -19,23 +20,25 @@ class App extends Component {
     firebase.initializeApp(firebaseConfig)
   }
 
+  // TODO: Nest selected city in home page
   render() {
     const store = compose(
       applyMiddleware(ReduxThunk)(createStore)(RootReducer)
     )
-    // <Scene key="auth">
-    //   <Scene key="login" component={LoginForm} title="Please Login" />
-    // </Scene>
     return (
       <Provider store={store}>
         <RouterWithRedux sceneStyle={{ paddingTop: 65 }}>
+          <Scene key="auth">
+            <Scene key="login" component={LoginForm} title="Please Login" />
+          </Scene>
 
           <Scene
             key="main"
             navigationBarStyle={styles.viewStyle}
             titleStyle={{ color: "magenta" }}
           >
-            <Scene key="landing" component={HomePage} title="Geather" initial />
+          <Scene key="preferences" component={ProfilePage} />
+          <Scene key="landing" component={HomePage} title="Geather" />
             <Scene key="selectedCity" component={CityPage} />
           </Scene>
         </RouterWithRedux>

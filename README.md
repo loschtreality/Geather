@@ -39,7 +39,9 @@ export const openWeatherConfig = {
 
 ## Todo
 - [x] Giphy Api
-- [ ] Open WeatherMaps API
-- [ ] Control fetching for components
+- [x] Open WeatherMaps API
 - [ ] DB persistence
 - [ ] oAuth for Facebook
+- [ ] Fetch all data on login
+- [ ] Custom Components
+- [ ] Custom start up page

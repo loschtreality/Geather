@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import { Actions } from "react-native-router-flux"
 
 import {
-  StyleSheet,
   ScrollView,
 } from "react-native"
 
@@ -91,13 +90,13 @@ class HomePage extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
   }
-})
+}
 
 
 const mapStateToProps = (state) => {
@@ -106,17 +105,16 @@ const mapStateToProps = (state) => {
     gifError: state.gif.gifError,
     routes: state.routes,
     currentWeather: state.weather.currentWeather,
-    weatherError: state.weather.weatherError
+    weatherError: state.weather.weatherError,
+    cities: state.profile.cities
   })
 }
 
 //TODO: Add cities dispatch
-// const mapDispatchToProps = () => {
-//   return ({
-//     getGif,
-//     getWeather
-//   })
-// }
+const mapDispatchToProps = {
+  getGif,
+  getWeather
+}
 
 
-export default connect(mapStateToProps, { getGif, getWeather })(HomePage)
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
