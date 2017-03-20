@@ -27,18 +27,14 @@ class App extends Component {
     )
     return (
       <Provider store={store}>
-        <RouterWithRedux sceneStyle={{ paddingTop: 65 }}>
+        <RouterWithRedux hideNavBar>
           <Scene key="auth">
-            <Scene key="login" component={LoginForm} title="Please Login" />
+            <Scene key="login" component={LoginForm} />
           </Scene>
 
-          <Scene
-            key="main"
-            navigationBarStyle={styles.viewStyle}
-            titleStyle={{ color: "magenta" }}
-          >
-          <Scene key="preferences" component={ProfilePage} />
+          <Scene key="main">
           <Scene key="landing" component={HomePage} title="Geather" />
+          <Scene key="preferences" component={ProfilePage} />
             <Scene key="selectedCity" component={CityPage} />
           </Scene>
         </RouterWithRedux>
@@ -46,13 +42,5 @@ class App extends Component {
     )
   }
 }
-
-const styles = {
-  viewStyle: {
-    backgroundColor: "#333",
-    height: 60,
-  }
-}
-
 
 export default App

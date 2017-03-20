@@ -4,13 +4,19 @@ import {
   Text,
   View,
   Image,
-  Button
+  Button,
  } from "react-native"
+
+import {
+  windowWidth,
+  windowHeight
+} from "../utils"
 
 import { emailChanged, passwordChanged, loginUser } from "../actions"
 import { Input, Spinner } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
+
 
 // TODO: Facebook login
 
@@ -57,15 +63,13 @@ class LoginForm extends Component {
 
       <View style={section}>
           <Input
-            label="Email"
-            placeholder="email@gmail.com"
+            placeholder="Email"
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
           />
 
           <Input
             secureTextEntry
-            label="Password"
             placeholder="password"
             onChangeText={this.onPasswordChange.bind(this)}
             value={this.props.password}
@@ -76,10 +80,7 @@ class LoginForm extends Component {
           {this.props.error}
         </Text>
 
-
-        <View style={section}>
           {this.renderButton()}
-        </View>
       </View>
     )
   }
@@ -88,20 +89,23 @@ class LoginForm extends Component {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: "grey"
+    backgroundColor: "grey",
+    alignItems: "center",
+    paddingTop: windowHeight * 0.1
   },
   imageStyle: {
     height: 225,
     width: 225,
-    alignSelf: "center"
+    marginBottom: 20
   },
   errorTextStyle: {
     fontSize: 20,
-    alignSelf: "center",
     color: "red"
   },
   section: {
-    flex: 2
+    flex: 0,
+    width: 0.8 * windowWidth,
+    backgroundColor: "green"
   }
 }
 

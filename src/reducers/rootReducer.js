@@ -6,11 +6,11 @@ import AuthReducer from "./authReducer"
 import ProfileReducer from "./profileReducer"
 
 const RootReducer = combineReducers({
-  routes: SceneReducer,
   auth: AuthReducer,
   gif: GifReducer,
   weather: WeatherReducer,
-  profile: ProfileReducer
+  profile: ProfileReducer,
+  routes: SceneReducer
 })
 
 export default RootReducer
