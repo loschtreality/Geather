@@ -8,7 +8,7 @@ const RootReducer = combineReducers({
   auth: AuthReducer,
   weather: WeatherReducer,
   gif: GifReducer,
-  routes: SceneReducer
+  routes: SceneReducer,
 })
 
 export default RootReducer
