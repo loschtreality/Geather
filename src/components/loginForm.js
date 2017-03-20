@@ -1,19 +1,14 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import EStyleSheet from "react-native-extended-stylesheet"
 import {
   Text,
   View,
   Image,
-  Button,
  } from "react-native"
 
-import {
-  windowWidth,
-  windowHeight
-} from "../utils"
-
 import { emailChanged, passwordChanged, loginUser } from "../actions"
-import { Input, Spinner } from "./shared"
+import { Input, Spinner, Button } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
 
@@ -40,7 +35,7 @@ class LoginForm extends Component {
   }
 
   return (
-    <Button title="Login" onPress={this.onButtonPress.bind(this)} />
+    <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
   )
 }
 
@@ -62,6 +57,8 @@ class LoginForm extends Component {
         />
 
       <View style={section}>
+        <Button innerHTML="Sign in with Facebook" onPress={this.onButtonPress.bind(this)} />
+
           <Input
             placeholder="Email"
             onChangeText={this.onEmailChange.bind(this)}
@@ -74,24 +71,27 @@ class LoginForm extends Component {
             onChangeText={this.onPasswordChange.bind(this)}
             value={this.props.password}
           />
+
+              {this.renderButton()}
+
+            <Text style={errorTextStyle}>
+              {this.props.error}
+            </Text>
+
         </View>
 
-        <Text style={errorTextStyle}>
-          {this.props.error}
-        </Text>
-
-          {this.renderButton()}
       </View>
     )
   }
 }
 
-const styles = {
+const styles = EStyleSheet.create({
+  $outline: 0,
   container: {
-    flex: 1,
-    backgroundColor: "grey",
+    backgroundColor: "black",
     alignItems: "center",
-    paddingTop: windowHeight * 0.1
+    paddingTop: "10%",
+    flex: 1
   },
   imageStyle: {
     height: 225,
@@ -103,11 +103,12 @@ const styles = {
     color: "red"
   },
   section: {
-    flex: 0,
-    width: 0.8 * windowWidth,
-    backgroundColor: "green"
+    width: "80%",
+    height: "40%",
+    alignItems: "center",
+    justifyContent: "space-around"
   }
-}
+})
 
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, loading } = auth

@@ -3,16 +3,30 @@ import { Provider, connect } from "react-redux"
 import { createStore, applyMiddleware, compose } from "redux"
 import ReduxThunk from "redux-thunk"
 import { Router, Scene } from "react-native-router-flux"
+import EStyleSheet from "react-native-extended-stylesheet"
+import { Dimensions } from "react-native"
 import firebase from "firebase"
+
 import { firebaseConfig } from "../envVariables"
 import RootReducer from "./reducers/rootReducer"
-
 import LoginForm from "./components/loginForm"
 import HomePage from "./components/homePage"
 import CityPage from "./components/cityPage"
 import ProfilePage from "./components/profilePage"
 
 const RouterWithRedux = connect()(Router)
+const width = Dimensions.get("window").width
+
+EStyleSheet.build({
+  $primaryColor: "blue",
+  $blue: "blue",
+  $facebookBlue: "darkblue",
+  $red: "red",
+  $yellow: "yellow",
+  $green: "green",
+  rem: width > 340 ? 18 : 16,
+  outline: 0
+})
 
 class App extends Component {
 

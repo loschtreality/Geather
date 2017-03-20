@@ -1,4 +1,3 @@
-import { Dimensions } from "react-native"
 import { openWeatherConfig, giphyConfig } from "../../envVariables.js"
 
 // Fetch function helpers
@@ -23,8 +22,3 @@ export const fetchContentData = (url, options = {}) => {
 // URLs
 export const giphyURL = `http://api.giphy.com/v1/gifs/random?api_key=${giphyConfig.apiKey}`
 export const openWeatherURL = `http://api.openweathermap.org/data/2.5/weather?appid=${openWeatherConfig.apiKey}&units=imperial`
-
-
-// Measurements
-export const windowWidth = Dimensions.get("window").width
-export const windowHeight = Dimensions.get("window").height

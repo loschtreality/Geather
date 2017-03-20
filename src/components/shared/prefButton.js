@@ -1,7 +1,7 @@
 import React from "react"
 
 import {
-  View,
+  TouchableOpacity,
   Text
 } from "react-native"
 
@@ -12,9 +12,9 @@ const PrefButton = (props) => {
   } = styles
 
   return (
-    <View style={[container, props.style]}>
+    <TouchableOpacity style={[container, props.style]}>
       <Text style={[textStyle, props.textStyle]}>{props.innerText}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
