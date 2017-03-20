@@ -34,15 +34,21 @@ export const openWeatherConfig = {
   apiKey: (key)
 }
 
+export const facebookConfig = {
+  appID: (id),
+  appSecret: (secret)
+}
+
 ```
 
 
 ## Todo
 - [x] Giphy Api
 - [x] Open WeatherMaps API
-- [ ] DB persistence
 - [ ] oAuth for Facebook
+- [ ] Navigation
 - [ ] Logout
-- [ ] Fetch all data on login
+- [ ] DB persistence
 - [ ] Custom Components
+- [ ] Fetch all data on login
 - [ ] Custom start up page

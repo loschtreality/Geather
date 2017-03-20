@@ -22,7 +22,7 @@ class LoginForm extends Component {
   }
 
   componentWillMount() {
-    this.props.authStateChanged()
+    // this.props.authStateChanged()
   }
 
 
