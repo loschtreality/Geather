@@ -106,7 +106,8 @@ const mapStateToProps = (state) => {
     routes: state.routes,
     currentWeather: state.weather.currentWeather,
     weatherError: state.weather.weatherError,
-    cities: state.profile.cities
+    cities: state.profile.cities,
+    user: state.auth.user
   })
 }
 

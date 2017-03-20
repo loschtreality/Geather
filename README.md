@@ -42,6 +42,7 @@ export const openWeatherConfig = {
 - [x] Open WeatherMaps API
 - [ ] DB persistence
 - [ ] oAuth for Facebook
+- [ ] Logout
 - [ ] Fetch all data on login
 - [ ] Custom Components
 - [ ] Custom start up page

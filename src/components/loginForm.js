@@ -7,7 +7,7 @@ import {
   Image,
  } from "react-native"
 
-import { emailChanged, passwordChanged, loginUser } from "../actions"
+import { loginUser, authStateChanged } from "../actions"
 import { Input, Spinner, Button } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
@@ -16,16 +16,27 @@ import logo from "../assets/images/giphy_logo.png"
 // TODO: Facebook login
 
 class LoginForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { email: "", password: "" }
+  }
+
+  componentWillMount() {
+    this.props.authStateChanged()
+  }
+
+
   onEmailChange(text) {
-    this.props.emailChanged(text)
+    this.setState({ email: text })
   }
 
   onPasswordChange(text) {
-    this.props.passwordChanged(text)
+    this.setState({ password: text })
   }
 
   onButtonPress() {
-    const { email, password } = this.props
+    const { email, password } = this.state
+    this.setState({ password: "" })
     this.props.loginUser({ email, password })
   }
 
@@ -111,13 +122,11 @@ const styles = EStyleSheet.create({
 })
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth
+  const { error, loading } = auth
   return {
-    email,
-    password,
     error,
     loading
   }
 }
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm)
+export default connect(mapStateToProps, { loginUser, authStateChanged })(LoginForm)

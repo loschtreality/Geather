@@ -29,6 +29,10 @@ EStyleSheet.build({
 })
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = { loggedIn: false }
+  }
 
   componentWillMount() {
     firebase.initializeApp(firebaseConfig)
@@ -39,6 +43,7 @@ class App extends Component {
     const store = compose(
       applyMiddleware(ReduxThunk)(createStore)(RootReducer)
     )
+
     return (
       <Provider store={store}>
         <RouterWithRedux hideNavBar>
