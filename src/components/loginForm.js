@@ -5,7 +5,10 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity
  } from "react-native"
+
+import FBSDK, { LoginManager } from "react-native-fbsdk"
 
 import { loginUser, authStateChanged } from "../actions"
 import { Input, Spinner, Button } from "./shared"
@@ -50,6 +53,19 @@ class LoginForm extends Component {
   )
 }
 
+  fbAuth() {
+    LoginManager.logInWithReadPermissions(["public_profile", "email"])
+    .then(result => {
+      if (result.isCancelled) {
+        console.log("Login Cancelled")
+      } else {
+        console.log(`Login success with: ${result.grantedPermissions}`)
+      }
+    }, (err) => {
+      console.log(`An error occurred: ${err}`)
+    })
+  }
+
 
   render() {
     const {
@@ -68,7 +84,12 @@ class LoginForm extends Component {
         />
 
       <View style={section}>
-        <Button innerHTML="Sign in with Facebook" onPress={this.onButtonPress.bind(this)} />
+        {/* <Button innerHTML="Sign in with Facebook" onPress={this.onButtonPress.bind(this)} /> */}
+        <TouchableOpacity onPress={this.fbAuth}>
+          <Text style={{ color: "white" }}>
+            Login With FB
+          </Text>
+        </TouchableOpacity>
 
           <Input
             placeholder="Email"
