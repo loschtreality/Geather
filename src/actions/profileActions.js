@@ -1,4 +1,4 @@
-import firebase from "firebase"
+// import firebase from "firebase"
 
 import {
   PATCH_PREFERENCE,
@@ -9,54 +9,54 @@ import {
 
 
 // Weather preferences
-export const fetchPreferences = () => {
-  const { currentUser } = firebase.auth()
+// export const fetchPreferences = () => {
+//   const { currentUser } = firebase.auth()
+//
+//   return (dispatch) => {
+//     firebase.database().ref(`/users/${currentUser.uid}/preferences`)
+//     .on("value", (snapshot) => {
+//       dispatch(receivePreferencesSuccess(snapshot.val()))
+//     })
+//   }
+// }
 
-  return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/preferences`)
-    .on("value", (snapshot) => {
-      dispatch(receivePreferencesSuccess(snapshot.val()))
-    })
-  }
-}
-
-export const postPreferences = (preferences) => {
-  const { currentUser } = firebase.auth()
-
-  firebase.database().ref(`/users/${currentUser.uid}/preferences`)
-  .push({ preferences })
-}
+// export const postPreferences = (preferences) => {
+//   const { currentUser } = firebase.auth()
+//
+//   firebase.database().ref(`/users/${currentUser.uid}/preferences`)
+//   .push({ preferences })
+// }
 
 
-export const patchPreferences = (/* changes */) => {
-  const { currentUser } = firebase.auth()
-
-  return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/preferences`)
-    // some patch method
-    .then(() => dispatch(/* method with changes */))
-  }
-}
+// export const patchPreferences = (/* changes */) => {
+//   const { currentUser } = firebase.auth()
+//
+//   return (dispatch) => {
+//     firebase.database().ref(`/users/${currentUser.uid}/preferences`)
+//     // some patch method
+//     .then(() => dispatch(/* method with changes */))
+//   }
+// }
 
 // City list
-export const postCity = (city) => {
-  const { currentUser } = firebase.auth()
-
-  return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/preferences/cities`)
-    .push(city)
-    // may need to find firebase method for this
-    .then(cityInfo => dispatch(postCitySuccess(cityInfo)))
-  }
-}
-
-export const deleteCity = (city) => {
-  const { currentUser } = firebase.auth()
-
-  return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/preferences/cities`)
-  }
-}
+// export const postCity = (city) => {
+//   const { currentUser } = firebase.auth()
+//
+//   return (dispatch) => {
+//     firebase.database().ref(`/users/${currentUser.uid}/preferences/cities`)
+//     .push(city)
+//     // may need to find firebase method for this
+//     .then(cityInfo => dispatch(postCitySuccess(cityInfo)))
+//   }
+// }
+//
+// export const deleteCity = (city) => {
+//   const { currentUser } = firebase.auth()
+//
+//   return (dispatch) => {
+//     firebase.database().ref(`/users/${currentUser.uid}/preferences/cities`)
+//   }
+// }
 
 
 // Dispatches

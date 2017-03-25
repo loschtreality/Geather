@@ -19,6 +19,30 @@ export const fetchContentData = (url, options = {}) => {
   .then(getJSON)
 }
 
-// URLs
-export const giphyURL = `http://api.giphy.com/v1/gifs/random?api_key=${giphyConfig.apiKey}`
-export const openWeatherURL = `http://api.openweathermap.org/data/2.5/weather?appid=${openWeatherConfig.apiKey}&units=imperial`
+export const postSession = (credentials, url = "http://localhost:3000/v1/sessions/facebook") => {
+  // const options = {
+  //   method: "POST",
+  //   body: JSON.stringify(credentials)
+  // }
+  // Hard coding in values for now
+  const data = new FormData()
+  data.append({
+    user_id: "10206797542936314",
+    acces_token: "EAAX8mlcBvnwBABccda4VZByRZCGGUETUJW21YN7wKzl4nKzvn57tc22UMzRXiGN9LvAOXcEcRBfZCQZBjMEeelZAIlyHVVnQlZB8d4ZAYA6Yo1lmBJ2EUgZC4ZByRf9doPcty3DPReYDZALD5FHOv2dACTxXQeL8qbb9EfEz4OFTwyKSFvKimkycKZAZAUuVc1ZAhcVazDjVmUq0OlmuD0HMJe41fRcP6QuV9eZAUZD"
+  })
+  const options = {
+    method: "POST",
+    body: data
+  }
+
+  return fetch(url, options)
+  .then(getJSON)
+}
+
+
+// Requestin weather
+// const options = {
+//   method: "GET",
+//   headers: headers.set({
+//     "X-Auth-Token": "0901e4b7-06de-43bc-a826-ab4996b4531b"
+//   })

@@ -5,9 +5,7 @@ import ReduxThunk from "redux-thunk"
 import { Router, Scene } from "react-native-router-flux"
 import EStyleSheet from "react-native-extended-stylesheet"
 import { Dimensions } from "react-native"
-import firebase from "firebase"
 
-import { firebaseConfig } from "../envVariables"
 import RootReducer from "./reducers/rootReducer"
 import LoginForm from "./components/loginForm"
 import HomePage from "./components/homePage"
@@ -35,7 +33,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    firebase.initializeApp(firebaseConfig)
+    // firebase.initializeApp(firebaseConfig)
   }
 
   // TODO: Nest selected city in home page

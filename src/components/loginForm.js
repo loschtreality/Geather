@@ -5,13 +5,12 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  // TouchableOpacity
  } from "react-native"
 
-import FBSDK, { LoginManager } from "react-native-fbsdk"
 
-import { loginUser, authStateChanged } from "../actions"
-import { Input, Spinner, Button } from "./shared"
+import { loginUser } from "../actions"
+import { Input, Spinner, Button, FBButton } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
 
@@ -38,34 +37,20 @@ class LoginForm extends Component {
   }
 
   onButtonPress() {
-    const { email, password } = this.state
-    this.setState({ password: "" })
-    this.props.loginUser({ email, password })
+    // const { email, password } = this.state
+    // this.setState({ password: "" })
+    this.props.loginUser()
   }
 
   renderButton() {
-  if (this.props.loading) {
-    return <Spinner size="large" />
+    if (this.props.loading) {
+      return <Spinner size="large" />
+    }
+
+    return (
+      <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
+    )
   }
-
-  return (
-    <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
-  )
-}
-
-  fbAuth() {
-    LoginManager.logInWithReadPermissions(["public_profile", "email"])
-    .then(result => {
-      if (result.isCancelled) {
-        console.log("Login Cancelled")
-      } else {
-        console.log(`Login success with: ${result.grantedPermissions}`)
-      }
-    }, (err) => {
-      console.log(`An error occurred: ${err}`)
-    })
-  }
-
 
   render() {
     const {
@@ -84,12 +69,8 @@ class LoginForm extends Component {
         />
 
       <View style={section}>
-        {/* <Button innerHTML="Sign in with Facebook" onPress={this.onButtonPress.bind(this)} /> */}
-        <TouchableOpacity onPress={this.fbAuth}>
-          <Text style={{ color: "white" }}>
-            Login With FB
-          </Text>
-        </TouchableOpacity>
+
+        <FBButton fbLogin={this.loginUser} />
 
           <Input
             placeholder="Email"
@@ -120,7 +101,7 @@ class LoginForm extends Component {
 const styles = EStyleSheet.create({
   $outline: 0,
   container: {
-    backgroundColor: "black",
+    backgroundColor: "grey",
     alignItems: "center",
     paddingTop: "10%",
     flex: 1
@@ -150,4 +131,8 @@ const mapStateToProps = ({ auth }) => {
   }
 }
 
-export default connect(mapStateToProps, { loginUser, authStateChanged })(LoginForm)
+const mapDispatchToProps = {
+  loginUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

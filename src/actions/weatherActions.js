@@ -10,8 +10,6 @@ export const getWeather = (url, params = {}) => {
         fetchContentData(url, params)
         .then(result => {
           const weatherData = result.main
-          console.log(result, "THIS IS THE RESULT")
-          console.log(weatherData, "WEATHER DATA")
           dispatch(fetchWeatherSuccess(weatherData))
         })
         .catch(err => {
