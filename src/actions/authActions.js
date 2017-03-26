@@ -12,22 +12,23 @@ import {
 } from "../utils"
 
 
-const setToken = (value) => {
-  // AsyncStorage returns a promise, refactor after working solution
-    return AsyncStorage.setItem("geather_token", value).then((resp) => {
-      console.log(resp, "Response from setting")
+const setCredentials = (userData) => {
+    // AsyncStorage returns a promise, refactor after working solution
+    return AsyncStorage.setItem("geather_data", JSON.stringify(userData)).then((resp) => {
+        console.log(resp, "Response from setting")
     }, (error) => console.log("reject from storage", error))
     .catch(err => console.log(`There was a huge error with setting token ${err}`))
+    // debugger
 }
 
-const getToken = () => {
+const getCredentials = () => {
   // AsyncStorage returns a promise, refactor after working solution
-  return AsyncStorage.getItem("geather_token").then((token) => {
+  return AsyncStorage.getItem("geather_data").then((token) => {
     console.log(token, "TOKEN FROM STORAGE")
-    return token
+    return JSON.parse(token)
   }, (error) => {
-    console.log(`There was an error retrieving the token ${error}`)
-  }).catch(err => console.log(err))
+    console.log(`There was an rejection retrieving the token ${error}`)
+  }).catch(err => console.log(err)).done()
 }
 
 export const createUser = (credentials) => {
@@ -35,10 +36,10 @@ export const createUser = (credentials) => {
     return (dispatch) => {
       dispatch({ type: LOGIN_USER })
 
-      postSession(credentials, "localhost:3000/v1/users")
+      postSession(credentials, "http://localhost:3000/v1/users")
       .then(user => {
         loginUserSuccess(dispatch, user)
-        setToken(user.acces_token)
+        setCredentials(user)
       })
       .catch(() => loginUserFail(dispatch))
     }
@@ -48,35 +49,45 @@ export const loginUser = (credentials) => {
  return (dispatch) => {
    dispatch({ type: LOGIN_USER })
 
-   postSession(/* credentials */)
-     .then(user => {
-       console.log(user, "USER FROM RESPONSE")
-       loginUserSuccess(dispatch, user)
-      })
+   postSession(credentials)
+     .then(userData => {
+       setCredentials(userData)
+       loginUserSuccess(dispatch, userData)
+     })
      .catch((error) => {
-       console.log(error)
+       console.log("Error in loginUser", error)
      })
  }
 }
 
-export const loginUserFacebook = (fbResponse) => {
-
-}
+// export const loginUserFacebook = (fbResponse) => {
+//
+// }
 
 export const authStateChanged = () => {
-  const token = getToken()
-  // shoot request to rails
-  if (token /* and rails logic */) {
-    dispatch({
-      type: LOGIN_USER_SUCCESS,
-      payload: user // <-- this will come from rails
-    })
-    Actions.main()
-  } else {
-    dispatch({ type: LOGIN_USER_FAIL })
-  }
-
+  getCredentials().then(credentials => {
+    return (dispatch) => {
+      if (credentials) {
+        postSession(credentials, "http://localhost:3000/v1/sessions")
+        .then(user => {
+          dispatch({
+            type: LOGIN_USER_SUCCESS,
+            payload: user // <-- this will come from rails
+          })
+          Actions.main()
+        })
+      } else {
+        dispatch({
+          type: null
+        })
+      }
+    }
+  })
 }
+
+// export const logoutUser = () => {
+  // TODO: Create Redux cycle + components for logging out
+// }
 
 const loginUserSuccess = (dispatch, user) => {
   dispatch({

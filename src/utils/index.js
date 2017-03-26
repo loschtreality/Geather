@@ -1,5 +1,3 @@
-import { openWeatherConfig, giphyConfig } from "../../envVariables.js"
-
 // Fetch function helpers
 const checkStatus = (response) => {
   if (response.status === 200) {
@@ -20,19 +18,22 @@ export const fetchContentData = (url, options = {}) => {
 }
 
 export const postSession = (credentials, url = "http://localhost:3000/v1/sessions/facebook") => {
-  // const options = {
-  //   method: "POST",
-  //   body: JSON.stringify(credentials)
-  // }
-  // Hard coding in values for now
-  const data = new FormData()
-  data.append({
-    user_id: "10206797542936314",
-    acces_token: "EAAX8mlcBvnwBABccda4VZByRZCGGUETUJW21YN7wKzl4nKzvn57tc22UMzRXiGN9LvAOXcEcRBfZCQZBjMEeelZAIlyHVVnQlZB8d4ZAYA6Yo1lmBJ2EUgZC4ZByRf9doPcty3DPReYDZALD5FHOv2dACTxXQeL8qbb9EfEz4OFTwyKSFvKimkycKZAZAUuVc1ZAhcVazDjVmUq0OlmuD0HMJe41fRcP6QuV9eZAUZD"
-  })
+  if (!credentials) {
+    console.warn("NO CREDENTIALS WERE SEEN")
+    return
+  }
   const options = {
     method: "POST",
-    body: data
+    headers: new Headers({
+      "Content-Type": "application/json"
+    }),
+    body: JSON.stringify({
+      "user": { // Must have user as a key for rails validation whitelist
+        // Keys must be strings, else stringify will error
+        "user_id": credentials.user_id,
+        "access_token": credentials.access_token
+      }
+    })
   }
 
   return fetch(url, options)
@@ -40,7 +41,7 @@ export const postSession = (credentials, url = "http://localhost:3000/v1/session
 }
 
 
-// Requestin weather
+// Requesting weather
 // const options = {
 //   method: "GET",
 //   headers: headers.set({

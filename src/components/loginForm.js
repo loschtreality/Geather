@@ -9,7 +9,7 @@ import {
  } from "react-native"
 
 
-import { loginUser } from "../actions"
+import { loginUser, authStateChanged } from "../actions"
 import { Input, Spinner, Button, FBButton } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
@@ -24,7 +24,7 @@ class LoginForm extends Component {
   }
 
   componentWillMount() {
-    // this.props.authStateChanged()
+    this.props.authStateChanged()
   }
 
 
@@ -39,7 +39,8 @@ class LoginForm extends Component {
   onButtonPress() {
     // const { email, password } = this.state
     // this.setState({ password: "" })
-    this.props.loginUser()
+    // TODO: Email login
+    // this.props.loginUser()
   }
 
   renderButton() {
@@ -60,7 +61,6 @@ class LoginForm extends Component {
       errorTextStyle
     } = styles
 
-
     return (
       <View style={container}>
         <Image
@@ -70,7 +70,7 @@ class LoginForm extends Component {
 
       <View style={section}>
 
-        <FBButton fbLogin={this.loginUser} />
+        <FBButton loginUser={this.props.loginUser} />
 
           <Input
             placeholder="Email"
@@ -123,6 +123,11 @@ const styles = EStyleSheet.create({
   }
 })
 
+LoginForm.propTypes = {
+  loginUser: React.PropTypes.func.isRequired,
+  authStateChanged: React.PropTypes.func.isRequired
+}
+
 const mapStateToProps = ({ auth }) => {
   const { error, loading } = auth
   return {
@@ -132,7 +137,8 @@ const mapStateToProps = ({ auth }) => {
 }
 
 const mapDispatchToProps = {
-  loginUser
+  loginUser,
+  authStateChanged
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

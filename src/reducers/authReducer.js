@@ -7,7 +7,6 @@ import {
 const INIT_STATE = { error: "", user: null, loading: false }
 
 const AuthReducer = (state = INIT_STATE, action) => {
-  // debugger
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, loading: true, error: "" }

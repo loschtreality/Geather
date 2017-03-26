@@ -47,12 +47,16 @@ export const facebookConfig = {
 }
 
 ```
-6. Download the Facebook SDK from Facebook for Developers. Open the zipped folder, rename and place it in `~$PATH/Documents/` as `FacebookSKD`
+6. Download the Facebook SDK from Facebook for Developers. Open the zipped folder, rename and place it in `~$PATH/Documents/` as `FacebookSDK`
+7. In Xcode, open the project `open ios/Geather.xcodeproj` and navigate to the project build settings
+8. Change the framework search path to `/Users/[user name]/Documents/FacebookSDK`
+9. Make sure the header search path is `$(inherited) $(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**`
 
 
 ## Todo
 - [x] Giphy Api
 - [x] Open WeatherMaps API
+- [ ] Geather API Login
 - [x] oAuth for Facebook iOS
 - [ ] oAuth for Facebook Android
 - [ ] Navigation Bar
