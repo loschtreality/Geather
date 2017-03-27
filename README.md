@@ -15,56 +15,30 @@ Geather is a React-Native, Android & IOS weather app which utilizes the Giphy AP
 
 ## Development
 
-Follow the steps below to run this project locally:
+Currently the backend API for this repository is being built in a separate private repository.
+These are tentative instructions for installation:
 
 1. Download Xcode for iOS development and Android Studio SKD for Android development.
 2. Follow the React Native installation guide for iOS and Android.
 3. Download Yarn and `yarn install` or `npm install`, however it's recommended to use yarn.
-4. Create a firebase and openWeatherMaps account.
-5. Create a file named `envVariables.js` in the root of the project, then add the following configurations.
 
-```js
-
-export const firebaseConfig = {
-   apiKey: (key),
-   authDomain: (info),
-   databaseURL: (info),
-   storageBucket: (info),
-   messagingSenderId: (info)
-}
-
-export const openWeatherConfig = {
-  apiKey: (key)
-}
-
-export const giphyConfig = {
-  apiKey: "dc6zaTOxFJmzC" // public api key for development
-}
-
-export const facebookConfig = {
-  appID: (id),
-  appSecret: (secret)
-}
-
-```
-6. Download the Facebook SDK from Facebook for Developers. Open the zipped folder, rename and place it in `~$PATH/Documents/` as `FacebookSDK`
-7. In Xcode, open the project `open ios/Geather.xcodeproj` and navigate to the project build settings
-8. Change the framework search path to `/Users/[user name]/Documents/FacebookSDK`
-9. Make sure the header search path is `$(inherited) $(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**`
+4. Download the Facebook SDK from Facebook for Developers. Open the zipped folder, rename and place it in `~$PATH/Documents/` as `FacebookSDK`
+5. In Xcode, open the project `open ios/Geather.xcodeproj` and navigate to the project build settings
+6. Change the framework search path to `/Users/[user name]/Documents/FacebookSDK`
+7. Make sure the header search path is `$(inherited) $(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**`
 
 
 ## Todo
 - [x] Giphy Api
 - [x] Open WeatherMaps API
-- [ ] Geather API Login
-- [ ] Add reject for !200 status
+- [x] Geather API Login, Add reject for !200 status
 - [x] oAuth for Facebook iOS
 - [ ] oAuth for Facebook Android
-- [ ] Create overlaying spinner
 - [ ] Navigation Bar
 - [ ] Profile
 - [ ] Logout
-- [ ] DB persistence
+- [ ] DB config for weather / gif storing
+- [ ] Create overlaying spinner
 - [ ] Custom Components
 - [ ] Fetch all data on login
 - [ ] Custom start up page
