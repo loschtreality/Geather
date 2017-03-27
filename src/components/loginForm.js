@@ -4,18 +4,17 @@ import EStyleSheet from "react-native-extended-stylesheet"
 import {
   Text,
   View,
-  Image,
-  // TouchableOpacity
+  Image
  } from "react-native"
 
 
-import { loginUser, authStateChanged } from "../actions"
+import { loginUser, createUser, authStateChanged } from "../actions"
 import { Input, Spinner, Button, FBButton } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
 
 
-// TODO: Facebook login
+// TODO: Email login
 
 class LoginForm extends Component {
   constructor(props) {
@@ -23,8 +22,8 @@ class LoginForm extends Component {
     this.state = { email: "", password: "" }
   }
 
-  componentWillMount = async () => {
-    await this.props.authStateChanged()
+  componentWillMount = () => {
+    // this.props.authStateChanged()
   }
 
 
@@ -37,21 +36,26 @@ class LoginForm extends Component {
   }
 
   onButtonPress() {
-    // const { email, password } = this.state
-    // this.setState({ password: "" })
-    // TODO: Email login
-    // this.props.loginUser()
+    const { email, password } = this.state
+    this.setState({ password: "" })
+    this.props.loginUser({ email, password })
   }
 
-  renderButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />
-    }
-
-    return (
-      <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
-    )
+  emailCreate() {
+    const { email, password } = this.state
+    this.setState({ email: "", password: "" })
+    this.props.createUser({ email, password })
   }
+
+  // renderButton() {
+  //   if (this.props.loading) {
+  //     return <Spinner size="large" />
+  //   }
+  //
+  //   return (
+      // <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
+  //   )
+  // }
 
   render() {
     const {
@@ -87,7 +91,13 @@ class LoginForm extends Component {
             value={this.props.password}
           />
 
-              {this.renderButton()}
+          <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
+
+          <Button
+            innerHTML="Create Account"
+            onPress={this.emailCreate.bind(this)}
+            buttonStyle={{ backgroundColor: "blue" }}
+          />
 
             <Text style={errorTextStyle}>
               {this.props.error}
@@ -101,7 +111,7 @@ class LoginForm extends Component {
 }
 
 const styles = EStyleSheet.create({
-  $outline: 0,
+  $outline: 1,
   container: {
     backgroundColor: "grey",
     alignItems: "center",
@@ -141,6 +151,7 @@ const mapStateToProps = ({ auth }) => {
 
 const mapDispatchToProps = {
   loginUser,
+  createUser,
   authStateChanged
 }
 

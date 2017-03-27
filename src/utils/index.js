@@ -17,23 +17,57 @@ export const fetchContentData = (url, options = {}) => {
   .then(getJSON)
 }
 
-export const postSession = (credentials, url = "http://localhost:3000/v1/sessions/facebook") => {
+export const postUser = (credentials) => {
   if (!credentials) {
-    console.warn("NO CREDENTIALS WERE SEEN")
+    console.warn("NO CREDENTIALS IN POST USER")
     return
   }
+  const body = { user: {} }
+  const url = "http://localhost:3000/users"
+
+  body.user.email = credentials.email
+  body.user.password = credentials.password
+
   const options = {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/json"
     }),
-    body: JSON.stringify({
-      "user": { // Must have user as a key for rails validation whitelist
-        // Keys must be strings, else stringify will error
-        "user_id": credentials.user_id,
-        "access_token": credentials.access_token
-      }
-    })
+    body: JSON.stringify(body)
+  }
+
+  return fetch(url, options)
+}
+
+export const postSession = (credentials) => {
+  const body = { user: {} }
+  let url
+  if (!credentials) {
+    console.warn("NO CREDENTIALS WERE SEEN")
+    return
+  }
+
+  if ("password" in credentials) {
+    console.log(credentials, "CREDENTIALS")
+    url = "http://localhost:3000/v1/sessions/email"
+    body.user.email = credentials.email
+    body.user.password = credentials.password
+  } else if ("g_id" in credentials) {
+    url = "http://localhost:3000/v1/sessions"
+    body.user.access_token = credentials.access_token
+    body.user.g_id = credentials.g_id
+  } else {
+    url = "http://localhost:3000/v1/sessions/facebook"
+    body.user.user_id = credentials.user_id
+    body.user.access_token = credentials.access_token
+  }
+
+  const options = {
+    method: "POST",
+    headers: new Headers({
+      "Content-Type": "application/json"
+    }),
+    body: JSON.stringify(body)
   }
 
   return fetch(url, options)

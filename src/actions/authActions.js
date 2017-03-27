@@ -8,7 +8,8 @@ import {
  } from "./types"
 
 import {
-  postSession
+  postSession,
+  postUser
 } from "../utils"
 
 
@@ -23,28 +24,47 @@ export const createUser = (credentials) => {
     return (dispatch) => {
       dispatch({ type: LOGIN_USER })
 
-      postSession(credentials, "http://localhost:3000/v1/users")
+      postUser(credentials)
       .then(user => {
-        setCredentials(user)
+        setCredentials({
+          g_id: user.id,
+          access_token: user.access_token
+        })
         loginUserSuccess(dispatch, user)
       })
       .catch(() => loginUserFail(dispatch))
     }
 }
 
+// Currently for FB, refactor for email & fb
 export const loginUser = (credentials) => {
- return (dispatch) => {
+ return /*async*/ (dispatch) => {
    dispatch({ type: LOGIN_USER })
 
+  //  const localData = await AsyncStorage.getItem("geather_data")
+   //
+  //  if (localData) {
+  //    postSession(localData).then(userData => {
+  //      loginUserSuccess(dispatch, userData)
+  //    }).catch((error) => {
+  //      console.log("Error in loginUser with local data", error)
+  //    })
+  //  } else {
+   // Set routes in env vars for production / development
    postSession(credentials)
      .then(userData => {
+       setCredentials({
+         g_id: userData.id,
+         acces_token: userData.acces_token
+       })
        loginUserSuccess(dispatch, userData)
      })
      .catch((error) => {
        console.log("Error in loginUser", error)
      })
+   }
  }
-}
+// }
 
 // export const loginUserFacebook = (fbResponse) => {
 //

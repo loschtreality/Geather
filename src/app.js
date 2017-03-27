@@ -23,7 +23,7 @@ EStyleSheet.build({
   $yellow: "yellow",
   $green: "green",
   rem: width > 340 ? 18 : 16,
-  outline: 0
+  outline: 1
 })
 
 class App extends Component {

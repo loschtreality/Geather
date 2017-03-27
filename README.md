@@ -57,8 +57,10 @@ export const facebookConfig = {
 - [x] Giphy Api
 - [x] Open WeatherMaps API
 - [ ] Geather API Login
+- [ ] Add reject for !200 status
 - [x] oAuth for Facebook iOS
 - [ ] oAuth for Facebook Android
+- [ ] Create overlaying spinner
 - [ ] Navigation Bar
 - [ ] Profile
 - [ ] Logout
