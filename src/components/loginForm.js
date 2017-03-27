@@ -23,8 +23,8 @@ class LoginForm extends Component {
     this.state = { email: "", password: "" }
   }
 
-  componentWillMount() {
-    this.props.authStateChanged()
+  componentWillMount = async () => {
+    await this.props.authStateChanged()
   }
 
 
@@ -60,6 +60,8 @@ class LoginForm extends Component {
       section,
       errorTextStyle
     } = styles
+
+    // debugger
 
     return (
       <View style={container}>
@@ -129,10 +131,11 @@ LoginForm.propTypes = {
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { error, loading } = auth
+  const { error, loading, user } = auth
   return {
     error,
-    loading
+    loading,
+    user
   }
 }
 

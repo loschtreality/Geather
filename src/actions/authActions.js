@@ -13,22 +13,9 @@ import {
 
 
 const setCredentials = (userData) => {
-    // AsyncStorage returns a promise, refactor after working solution
-    return AsyncStorage.setItem("geather_data", JSON.stringify(userData)).then((resp) => {
-        console.log(resp, "Response from setting")
-    }, (error) => console.log("reject from storage", error))
+  AsyncStorage.setItem("geather_data", JSON.stringify(userData))
     .catch(err => console.log(`There was a huge error with setting token ${err}`))
-    // debugger
-}
-
-const getCredentials = () => {
-  // AsyncStorage returns a promise, refactor after working solution
-  return AsyncStorage.getItem("geather_data").then((token) => {
-    console.log(token, "TOKEN FROM STORAGE")
-    return JSON.parse(token)
-  }, (error) => {
-    console.log(`There was an rejection retrieving the token ${error}`)
-  }).catch(err => console.log(err)).done()
+    .done()
 }
 
 export const createUser = (credentials) => {
@@ -38,8 +25,8 @@ export const createUser = (credentials) => {
 
       postSession(credentials, "http://localhost:3000/v1/users")
       .then(user => {
-        loginUserSuccess(dispatch, user)
         setCredentials(user)
+        loginUserSuccess(dispatch, user)
       })
       .catch(() => loginUserFail(dispatch))
     }
@@ -51,7 +38,6 @@ export const loginUser = (credentials) => {
 
    postSession(credentials)
      .then(userData => {
-       setCredentials(userData)
        loginUserSuccess(dispatch, userData)
      })
      .catch((error) => {
@@ -65,24 +51,15 @@ export const loginUser = (credentials) => {
 // }
 
 export const authStateChanged = () => {
-  getCredentials().then(credentials => {
-    return (dispatch) => {
-      if (credentials) {
-        postSession(credentials, "http://localhost:3000/v1/sessions")
-        .then(user => {
-          dispatch({
-            type: LOGIN_USER_SUCCESS,
-            payload: user // <-- this will come from rails
-          })
-          Actions.main()
-        })
-      } else {
-        dispatch({
-          type: null
-        })
-      }
+  return async (dispatch) => {
+    const userData = await AsyncStorage.getItem("geather_data")
+    if (userData) {
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: JSON.parse(userData) })
+      Actions.main()
+    } else {
+      dispatch({ type: null })
     }
-  })
+  }
 }
 
 // export const logoutUser = () => {
