@@ -7,7 +7,8 @@ import {
 } from "react-native"
 
 import {
-  ButtonGroup
+  ButtonGroup,
+  Navigation
 } from "./shared"
 
 import {
@@ -20,10 +21,6 @@ import {
 class ProfilePage extends Component {
   constructor(props) {
     super(props)
-  }
-
-  componentWillReceiveProps(/*nextProps*/) {
-
   }
 
   render() {
@@ -56,6 +53,7 @@ class ProfilePage extends Component {
           </View>
 
         </View>
+        <Navigation />
       </View>
     )
   }

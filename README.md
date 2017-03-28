@@ -34,6 +34,7 @@ These are tentative instructions for installation:
 - [x] Geather API Login, Add reject for !200 status
 - [x] oAuth for Facebook iOS
 - [ ] oAuth for Facebook Android
+- [ ] Complete login testing
 - [ ] Navigation Bar
 - [ ] Profile
 - [ ] Logout
@@ -42,3 +43,15 @@ These are tentative instructions for installation:
 - [ ] Custom Components
 - [ ] Fetch all data on login
 - [ ] Custom start up page
+
+## Issues
+
+1. Android denies network connections to non https sources, including localhost and local IP
+2. Jest modules are not found, despite being installed
+3. Preload height of gif is incorrect, jumps on load
+4. Upon an unsuccessful return from the server, the app navigates to a new page
+
+
+## Notes
+
+1. Disable reoccurring fetching on landing page by refactoring server call

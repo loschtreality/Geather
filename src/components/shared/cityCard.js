@@ -1,4 +1,5 @@
 import React from "react"
+import { Actions } from "react-native-router-flux"
 import {
   View,
   StyleSheet,
@@ -12,7 +13,7 @@ const CityCard = (props) => {
 
     return (
       <View style={container} >
-        <Text onPress={() => props.navigate({ city: props.city })}>
+        <Text onPress={() => Actions.selectedCity({ city: props.city })}>
           { props.city }
         </Text>
       </View>

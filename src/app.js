@@ -12,6 +12,7 @@ import RootReducer from "./reducers/rootReducer"
 import LoginForm from "./components/loginForm"
 import HomePage from "./components/homePage"
 import CityPage from "./components/cityPage"
+import CityListPage from "./components/cityListPage"
 import ProfilePage from "./components/profilePage"
 
 const RouterWithRedux = connect()(Router)
@@ -35,7 +36,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    // firebase.initializeApp(firebaseConfig)
+    // IDEA: Fetch credentials from local storage here
+    // If credentials are found, make request to server for user info
+    // else go to login page
   }
 
   // TODO: Nest selected city in home page
@@ -52,9 +55,11 @@ class App extends Component {
           </Scene>
 
           <Scene key="main">
-          <Scene key="landing" component={HomePage} title="Geather" />
-          <Scene key="preferences" component={ProfilePage} />
-            <Scene key="selectedCity" component={CityPage} />
+            <Scene key="landing" component={HomePage} title="Geather" />
+            <Scene key="preferences" component={ProfilePage} />
+            <Scene key="cities" component={CityListPage}>
+              <Scene key="selectedCity" component={CityPage} />
+            </Scene>
           </Scene>
         </RouterWithRedux>
       </Provider>
