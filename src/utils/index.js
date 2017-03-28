@@ -1,3 +1,5 @@
+import { AsyncStorage } from "react-native"
+
 // Fetch function helpers
 const checkStatus = (response) => {
   if (response.status === 200) {
@@ -17,13 +19,34 @@ export const fetchContentData = (url, options = {}) => {
   .then(getJSON)
 }
 
+export const fetchUserWeather = async () => {
+  let storageData = await AsyncStorage.getItem("geather_data")
+  storageData = JSON.parse(storageData)
+  console.info(storageData, "STORAGE DATA FROM ")
+  return new Promise((resolve, reject) => {
+    const options = {
+      method: "GET",
+      headers: new Headers({
+        //storageData.access_token "0901e4b7-06de-43bc-a826-ab4996b4531b"
+        "X-Auth-Token": storageData.access_token
+      }),
+    }
+    fetchContentData("http://127.0.0.1:3000/v1/weather", options)
+    .then(weatherData => {
+      resolve(weatherData)
+    }, (rejection) => {
+      reject(rejection)
+    })
+  })
+}
+
 export const postUser = (credentials) => {
   if (!credentials) {
     console.warn("NO CREDENTIALS IN POST USER")
     return
   }
   const body = { user: {} }
-  const url = "https://127.0.0.1:3000/users"
+  const url = "http://127.0.0.1:3000/users"
 
   body.user.email = credentials.email
   body.user.password = credentials.password
@@ -49,15 +72,15 @@ export const postSession = (credentials) => {
 
   if ("password" in credentials) {
     console.log(credentials, "CREDENTIALS")
-    url = "https://127.0.0.1:3000/v1/sessions/email"
+    url = "http://127.0.0.1:3000/v1/sessions/email"
     body.user.email = credentials.email
     body.user.password = credentials.password
   } else if ("g_id" in credentials) {
-    url = "https://127.0.0.1:3000/v1/sessions"
-    body.user.access_token = credentials.access_token
+    url = "http://127.0.0.1:3000/v1/sessions"
     body.user.g_id = credentials.g_id
+    body.user.access_token = credentials.access_token
   } else {
-    url = "https://127.0.0.1:3000/v1/sessions/facebook"
+    url = "http://127.0.0.1:3000/v1/sessions/facebook"
     body.user.user_id = credentials.user_id
     body.user.access_token = credentials.access_token
   }

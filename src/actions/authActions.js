@@ -25,37 +25,30 @@ export const createUser = (credentials) => {
       dispatch({ type: LOGIN_USER })
 
       postUser(credentials)
-      .then(user => {
+      .then(userData => {
+      console.info(JSON.parse(userData), "USER DATA CREATE USER")
         setCredentials({
-          g_id: user.id,
-          access_token: user.access_token
+          g_id: userData.id,
+          access_token: userData.access_token
         })
-        loginUserSuccess(dispatch, user)
+        loginUserSuccess(dispatch, userData)
       })
       .catch(() => loginUserFail(dispatch))
     }
 }
 
-// Currently for FB, refactor for email & fb
+// Routing logic for Facebook vs Email in Utils index
 export const loginUser = (credentials) => {
- return /*async*/ (dispatch) => {
+ return (dispatch) => {
    dispatch({ type: LOGIN_USER })
 
-  //  const localData = await AsyncStorage.getItem("geather_data")
-   //
-  //  if (localData) {
-  //    postSession(localData).then(userData => {
-  //      loginUserSuccess(dispatch, userData)
-  //    }).catch((error) => {
-  //      console.log("Error in loginUser with local data", error)
-  //    })
-  //  } else {
    // Set routes in env vars for production / development
    postSession(credentials)
      .then(userData => {
+    console.info(userData, "USER DATA LOGIN USER")
        setCredentials({
          g_id: userData.id,
-         acces_token: userData.acces_token
+         access_token: userData.access_token
        })
        loginUserSuccess(dispatch, userData)
      })
@@ -64,15 +57,11 @@ export const loginUser = (credentials) => {
      })
    }
  }
-// }
-
-// export const loginUserFacebook = (fbResponse) => {
-//
-// }
 
 export const authStateChanged = () => {
   return async (dispatch) => {
     const userData = await AsyncStorage.getItem("geather_data")
+    console.info(JSON.parse(userData), "USER DATA AUTH STATE CHANGED")
     if (userData) {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: JSON.parse(userData) })
       Actions.main()

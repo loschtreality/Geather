@@ -3,17 +3,16 @@ import {
   ERROR_WEATHER
  } from "./types"
 
-import { fetchContentData } from "../utils"
+import { fetchUserWeather } from "../utils"
 
-export const getWeather = (url, params = {}) => {
+export const getWeather = () => {
     return (dispatch) => {
-        fetchContentData(url, params)
-        .then(result => {
+        fetchUserWeather().then(result => {
           const weatherData = result.main
           dispatch(fetchWeatherSuccess(weatherData))
         })
         .catch(err => {
-          console.log(err, "THIS IS THE ERROR")
+          console.error("Error in getWeather action", err)
           dispatch(fetchWeatherFail(`${err.name}: ${err.message}`))
         })
     }

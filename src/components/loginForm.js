@@ -9,7 +9,7 @@ import {
 
 
 import { loginUser, createUser, authStateChanged } from "../actions"
-import { Input, Spinner, Button, FBButton } from "./shared"
+import { Input, Button, FBButton } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
 
@@ -46,16 +46,6 @@ class LoginForm extends Component {
     this.setState({ email: "", password: "" })
     this.props.createUser({ email, password })
   }
-
-  // renderButton() {
-  //   if (this.props.loading) {
-  //     return <Spinner size="large" />
-  //   }
-  //
-  //   return (
-      // <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
-  //   )
-  // }
 
   render() {
     const {

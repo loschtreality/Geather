@@ -15,7 +15,6 @@ import {
 } from "./shared"
 
 
-import { giphyURL, openWeatherURL } from "../utils"
 import { getGif, getWeather } from "../actions"
 
 
@@ -28,9 +27,8 @@ class HomePage extends Component {
 
   componentWillMount() {
     //TODO: refactor to function calls instead of direct url strings
-    console.log(`${openWeatherURL}&q=London,uk`, "WEATHER URL")
-    this.props.getGif(`${giphyURL}&tag=summer`)
-    this.props.getWeather(`${openWeatherURL}&q=London,uk`)
+    this.props.getWeather()
+    // this.props.getGif()
   }
 
   changeScene(city) {
