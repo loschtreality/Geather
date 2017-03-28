@@ -3,13 +3,13 @@ import {
   ERROR_GIF
  } from "./types"
 
-import { fetchContentData } from "../utils"
+import { fetchUserContent } from "../utils"
 
 // Gif Dispatching and Actions
 
-export const getGif = (url, params = {}) => {
+export const getGif = () => {
     return (dispatch) => {
-        fetchContentData(url, params)
+        fetchUserContent("gif")
         .then(result => {
           const gifURL = result.data.fixed_height_downsampled_url
           dispatch(fetchGifSuccess(gifURL))

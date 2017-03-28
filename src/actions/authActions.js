@@ -26,7 +26,6 @@ export const createUser = (credentials) => {
 
       postUser(credentials)
       .then(userData => {
-      console.info(JSON.parse(userData), "USER DATA CREATE USER")
         setCredentials({
           g_id: userData.id,
           access_token: userData.access_token
@@ -45,7 +44,6 @@ export const loginUser = (credentials) => {
    // Set routes in env vars for production / development
    postSession(credentials)
      .then(userData => {
-    console.info(userData, "USER DATA LOGIN USER")
        setCredentials({
          g_id: userData.id,
          access_token: userData.access_token
@@ -61,7 +59,6 @@ export const loginUser = (credentials) => {
 export const authStateChanged = () => {
   return async (dispatch) => {
     const userData = await AsyncStorage.getItem("geather_data")
-    console.info(JSON.parse(userData), "USER DATA AUTH STATE CHANGED")
     if (userData) {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: JSON.parse(userData) })
       Actions.main()

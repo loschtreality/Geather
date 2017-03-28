@@ -26,9 +26,8 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    //TODO: refactor to function calls instead of direct url strings
     this.props.getWeather()
-    // this.props.getGif()
+    this.props.getGif()
   }
 
   changeScene(city) {
@@ -94,6 +93,11 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
   }
+}
+
+HomePage.propTypes = {
+  getGif: React.PropTypes.func.isRequired,
+  getWeather: React.PropTypes.func.isRequired
 }
 
 

@@ -19,21 +19,19 @@ export const fetchContentData = (url, options = {}) => {
   .then(getJSON)
 }
 
-export const fetchUserWeather = async () => {
+export const fetchUserContent = async (routeEndpoint /* weather || gif */) => {
   let storageData = await AsyncStorage.getItem("geather_data")
   storageData = JSON.parse(storageData)
-  console.info(storageData, "STORAGE DATA FROM ")
   return new Promise((resolve, reject) => {
     const options = {
       method: "GET",
       headers: new Headers({
-        //storageData.access_token "0901e4b7-06de-43bc-a826-ab4996b4531b"
         "X-Auth-Token": storageData.access_token
       }),
     }
-    fetchContentData("http://127.0.0.1:3000/v1/weather", options)
-    .then(weatherData => {
-      resolve(weatherData)
+    fetchContentData(`http://127.0.0.1:3000/v1/${routeEndpoint}`, options)
+    .then(contentData => {
+      resolve(contentData)
     }, (rejection) => {
       reject(rejection)
     })
