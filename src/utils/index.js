@@ -23,7 +23,7 @@ export const postUser = (credentials) => {
     return
   }
   const body = { user: {} }
-  const url = "http://localhost:3000/users"
+  const url = "https://127.0.0.1:3000/users"
 
   body.user.email = credentials.email
   body.user.password = credentials.password
@@ -49,15 +49,15 @@ export const postSession = (credentials) => {
 
   if ("password" in credentials) {
     console.log(credentials, "CREDENTIALS")
-    url = "http://localhost:3000/v1/sessions/email"
+    url = "https://127.0.0.1:3000/v1/sessions/email"
     body.user.email = credentials.email
     body.user.password = credentials.password
   } else if ("g_id" in credentials) {
-    url = "http://localhost:3000/v1/sessions"
+    url = "https://127.0.0.1:3000/v1/sessions"
     body.user.access_token = credentials.access_token
     body.user.g_id = credentials.g_id
   } else {
-    url = "http://localhost:3000/v1/sessions/facebook"
+    url = "https://127.0.0.1:3000/v1/sessions/facebook"
     body.user.user_id = credentials.user_id
     body.user.access_token = credentials.access_token
   }
