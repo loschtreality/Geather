@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component } from "react"
 import { Provider, connect } from "react-redux"
 import { createStore, applyMiddleware, compose } from "redux"
