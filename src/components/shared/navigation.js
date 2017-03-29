@@ -26,7 +26,7 @@ class Navigation extends React.Component {
       navText
     } = styles
     return (
-      <View style={container}>
+      <View style={[container, this.props.style]}>
         <TouchableHighlight style={buttonContainer}>
             <Text
               style={navText} // display button color as faded grey if disabled

@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 // import { Actions } from "react-native-router-flux"
+
 import {
   Text,
   View
@@ -29,7 +30,8 @@ class ProfilePage extends Component {
       weatherPreferences,
       prefRow,
       title,
-      header
+      header,
+      nav
     } = styles
 
     return (
@@ -53,7 +55,7 @@ class ProfilePage extends Component {
           </View>
 
         </View>
-        <Navigation />
+        <Navigation style={nav} />
       </View>
     )
   }
@@ -76,6 +78,10 @@ const styles = {
   },
   header: {
     fontSize: 16
+  },
+  nav: {
+    position: "absolute",
+    bottom: 0
   }
 }
 

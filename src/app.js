@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from "redux"
 import ReduxThunk from "redux-thunk"
 import { Router, Scene } from "react-native-router-flux"
 import EStyleSheet from "react-native-extended-stylesheet"
-import { Dimensions } from "react-native"
+import { Dimensions, StatusBar } from "react-native"
 
 import RootReducer from "./reducers/rootReducer"
 import LoginForm from "./components/loginForm"
@@ -32,13 +32,13 @@ EStyleSheet.build({
 class App extends Component {
   constructor() {
     super()
-    this.state = { loggedIn: false }
   }
 
   componentWillMount() {
     // IDEA: Fetch credentials from local storage here
     // If credentials are found, make request to server for user info
     // else go to login page
+    StatusBar.setHidden(true)
   }
 
   // TODO: Nest selected city in home page
