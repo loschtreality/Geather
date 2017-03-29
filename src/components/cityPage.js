@@ -68,11 +68,8 @@ const mapStateToProps = (state) => {
   })
 }
 
-//TODO: Add cities dispatch
-// const mapDispatchToProps = (dispatch) => {
-//   return ({
-//     // getGif: (url, params = {}) => dispatch(getGif(url, params))
-//   })
-// }
+const mapDispatchToProps = {
+  getGif
+}
 
-export default connect(mapStateToProps, { getGif })(CityPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CityPage)

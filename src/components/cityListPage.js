@@ -25,10 +25,13 @@ class CityListPage extends React.Component {
     this.state = {
       dataSource: ds.cloneWithRows(["paris", "austin", "los angeles"] /* this.props.cities */)
     }
+
+    this.changeScene = this.changeScene.bind(this)
   }
 
   changeScene(city) {
     return function () {
+      console.log(`Navigate to the ${city} page`)
       Actions.selectedCity({ city })
     }
   }
@@ -46,7 +49,9 @@ class CityListPage extends React.Component {
 
     return (
       <Swipeout autoClose right={swipeBtns}>
-        <CityCard city={rowData} onPress={this.removeCity.bind(this, rowData)} />
+        <View city={rowData}>
+          <Text onPress={this.changeScene(rowData)}>{rowData}</Text>
+        </View>
       </Swipeout>
     )
   }

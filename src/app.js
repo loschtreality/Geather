@@ -57,9 +57,8 @@ class App extends Component {
           <Scene key="main">
             <Scene key="landing" component={HomePage} title="Geather" />
             <Scene key="preferences" component={ProfilePage} />
-            <Scene key="cities" component={CityListPage}>
-              <Scene key="selectedCity" component={CityPage} />
-            </Scene>
+            <Scene key="cities" component={CityListPage} />
+            <Scene key="selectedCity" component={CityPage} />
           </Scene>
         </RouterWithRedux>
       </Provider>
