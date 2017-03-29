@@ -8,6 +8,7 @@ import {
   GifElement,
   WeatherStats,
   Spinner,
+  Navigation
 } from "./shared"
 
 import { getGif } from "../actions"
@@ -38,14 +39,15 @@ class CityPage extends Component {
 
   render() {
     const {
-      container
+      container,
+      nav
     } = styles
 
     return (
       <View style={container}>
         { this.renderGif() }
         <WeatherStats temperature="72" city={this.props.city} humidity="30%" />
-
+        <Navigation style={nav} />
       </View>
     )
   }
@@ -53,11 +55,14 @@ class CityPage extends Component {
 
 const styles = {
   container: {
-    marginTop: 60,
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
     backgroundColor: "black"
+  },
+  nav: {
+    position: "absolute",
+    bottom: 0
   }
 }
 

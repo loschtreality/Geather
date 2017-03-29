@@ -49,9 +49,7 @@ class CityListPage extends React.Component {
 
     return (
       <Swipeout autoClose right={swipeBtns}>
-        <View city={rowData}>
-          <Text onPress={this.changeScene(rowData)}>{rowData}</Text>
-        </View>
+          <CityCard city={rowData} onPress={this.changeScene} /> 
       </Swipeout>
     )
   }
