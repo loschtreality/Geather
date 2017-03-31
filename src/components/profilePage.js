@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// import { Actions } from "react-native-router-flux"
+import EStyleSheet from "react-native-extended-stylesheet"
 
 import {
   Text,
@@ -9,14 +9,16 @@ import {
 
 import {
   ButtonGroup,
-  Navigation
+  Navigation,
+  Button
 } from "./shared"
 
 import {
   addCity,
   removeCity,
-  updateWeatherPreference
-} from "../actions/profileActions"
+  updateWeatherPreference,
+  logoutUser
+} from "../actions"
 
 
 class ProfilePage extends Component {
@@ -29,6 +31,7 @@ class ProfilePage extends Component {
       container,
       weatherPreferences,
       prefRow,
+      buttonGroup,
       title,
       header,
       nav
@@ -37,53 +40,61 @@ class ProfilePage extends Component {
     return (
       <View style={container}>
         <View style={weatherPreferences}>
-          <Text style={title}>Weather</Text>
+          <Text style={title}>Settings</Text>
 
           <View style={prefRow}>
             <Text style={header}>Hot:</Text>
-            <ButtonGroup />
+            <ButtonGroup style={buttonGroup} />
           </View>
 
           <View style={prefRow}>
             <Text style={header}>Warm:</Text>
-            <ButtonGroup style={{ flex: 2 }} />
+            <ButtonGroup style={buttonGroup} />
           </View>
 
           <View style={prefRow}>
             <Text style={header}>Cold:</Text>
-            <ButtonGroup />
+            <ButtonGroup style={buttonGroup} />
           </View>
 
         </View>
+
+        <Button text="Log Out" onPress={this.props.logoutUser} />
+
         <Navigation style={nav} />
       </View>
     )
   }
 }
 
-const styles = {
+const styles = EStyleSheet.create({
   container: {
     flex: 1,
   },
-  weatherPreferences: {
-
-  },
+  weatherPreferences: {},
   prefRow: {
-
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  buttonGroup: {
+    flex: 3
   },
   title: {
     fontSize: 25,
     fontWeight: "bold",
-    marginBottom: 15
+    marginBottom: 15,
+    textAlign: "center"
   },
   header: {
-    fontSize: 16
+    fontSize: 16,
+    flex: 1,
+    textAlign: "center"
   },
   nav: {
     position: "absolute",
     bottom: 0
   }
-}
+})
 
 const mapStateToProps = (state) => {
   // state.profile
@@ -96,7 +107,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
  addCity,
  removeCity,
- updateWeatherPreference
+ updateWeatherPreference,
+ logoutUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)

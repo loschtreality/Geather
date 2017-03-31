@@ -1,14 +1,14 @@
 import React from "react"
+import EStyleSheet from "react-native-extended-stylesheet"
 import {
   View,
-  StyleSheet
 } from "react-native"
 
 import {
   PrefButton
 } from "./"
 
-const ButtonGroup = () => {
+const ButtonGroup = (props) => {
     const {
       container,
       buttonLove,
@@ -17,7 +17,7 @@ const ButtonGroup = () => {
     } = styles
 
     return (
-      <View style={container}>
+      <View style={[container, props.style]}>
         <PrefButton innerText="Love" style={buttonLove} />
         <PrefButton innerText="Neutral" style={buttonNeutral} />
         <PrefButton innerText="Hate" style={buttonHate} />
@@ -25,7 +25,8 @@ const ButtonGroup = () => {
     )
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
+  outline: 1,
   container: {
     justifyContent: "space-around",
     flexDirection: "row"

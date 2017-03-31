@@ -1,7 +1,8 @@
 import React from "react"
+import EStyleSheet from "react-native-extended-stylesheet"
 
 import {
-  TouchableOpacity,
+  TouchableHighlight,
   Text
 } from "react-native"
 
@@ -12,13 +13,13 @@ const PrefButton = (props) => {
   } = styles
 
   return (
-    <TouchableOpacity style={[container, props.style]}>
+    <TouchableHighlight style={[container, props.style]}>
       <Text style={[textStyle, props.textStyle]}>{props.innerText}</Text>
-    </TouchableOpacity>
+    </TouchableHighlight>
   )
 }
 
-const styles = {
+const styles = EStyleSheet.create({
   container: {
     borderStyle: "solid",
     borderTopColor: "black",
@@ -29,7 +30,6 @@ const styles = {
   textStyle: {
     margin: 3
   }
-
-}
+})
 
 export { PrefButton }

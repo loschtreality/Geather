@@ -81,12 +81,12 @@ class LoginForm extends Component {
             value={this.props.password}
           />
 
-          <Button innerHTML="Login" onPress={this.onButtonPress.bind(this)} />
+          <Button text="Login" onPress={this.onButtonPress.bind(this)} />
 
           <Button
-            innerHTML="Create Account"
+            text="Create Account"
             onPress={this.emailCreate.bind(this)}
-            buttonStyle={{ backgroundColor: "blue" }}
+            style={{ backgroundColor: "blue" }}
           />
 
             <Text style={errorTextStyle}>

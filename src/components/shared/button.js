@@ -13,8 +13,8 @@ const Button = (props) => {
   } = styles
 
   return (
-    <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.buttonStyle]}>
-      <Text style={[textStyle, props.textStyle]}>{props.innerHTML}</Text>
+    <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.style]}>
+      <Text style={[textStyle, props.textStyle]}>{props.text}</Text>
     </TouchableOpacity>
   )
 }

@@ -2,11 +2,13 @@
 
 import { AsyncStorage } from "react-native"
 import { Actions } from "react-native-router-flux"
+import { LoginManager } from "react-native-fbsdk"
 
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGOUT_USER
  } from "./types"
 
 import {
@@ -70,9 +72,14 @@ export const authStateChanged = () => {
   }
 }
 
-// export const logoutUser = () => {
-  // TODO: Create Redux cycle + components for logging out
-// }
+export const logoutUser = () => {
+  return (dispatch) => {
+    AsyncStorage.removeItem("geather_data")
+    LoginManager.logOut()
+    dispatch({ type: LOGOUT_USER })
+    Actions.auth()
+  }
+}
 
 const loginUserSuccess = (dispatch, user) => {
   dispatch({

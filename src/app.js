@@ -56,7 +56,7 @@ class App extends Component {
 
           <Scene key="main">
             <Scene key="landing" component={HomePage} title="Geather" />
-            <Scene key="preferences" component={ProfilePage} />
+            <Scene key="preferences" component={ProfilePage} initial />
             <Scene key="cities" component={CityListPage} />
             <Scene key="selectedCity" component={CityPage} />
           </Scene>
