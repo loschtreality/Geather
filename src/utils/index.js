@@ -19,7 +19,7 @@ export const fetchContentData = (url, options = {}) => {
   .then(getJSON)
 }
 
-export const fetchUserContent = async (routeEndpoint /* weather || gif */) => {
+export const fetchUserContent = async (routeEndpoint /* weathers || gif */) => {
   let storageData = await AsyncStorage.getItem("geather_data")
   storageData = JSON.parse(storageData)
   return new Promise((resolve, reject) => {

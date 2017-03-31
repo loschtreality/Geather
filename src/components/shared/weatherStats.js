@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "column",
     flex: 2,
-    backgroundColor: "grey",
+    backgroundColor: "#333",
     opacity: 0.75,
   },
   tempContainer: {
