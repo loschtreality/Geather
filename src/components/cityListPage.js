@@ -23,17 +23,14 @@ class CityListPage extends React.Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.state = {
-      dataSource: ds.cloneWithRows(["paris", "austin", "los angeles"] /* this.props.cities */)
+      dataSource: ds.cloneWithRows(this.props.cities)
     }
 
     this.changeScene = this.changeScene.bind(this)
   }
 
-  changeScene(city) {
-    return function () {
-      console.log(`Navigate to the ${city} page`)
-      Actions.selectedCity({ city })
-    }
+  changeScene(cityData) {
+      Actions.selectedCity({ cityData })
   }
 
   removeCity(rowData) {
@@ -44,12 +41,12 @@ class CityListPage extends React.Component {
     const swipeBtns = [{
       text: "Delete",
       style: { backgroundColor: "red" },
-      onPress: () => this.removeCity(rowData) // dispatch action here
+      onPress: () => this.removeCity(rowData.city) // dispatch action here
     }]
 
     return (
       <Swipeout autoClose right={swipeBtns}>
-          <CityCard city={rowData} onPress={this.changeScene} /> 
+          <CityCard cityData={rowData} onPress={this.changeScene} />
       </Swipeout>
     )
   }
@@ -123,7 +120,7 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities
+    cities: state.weather.cities
   }
 }
 

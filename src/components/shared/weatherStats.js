@@ -17,28 +17,44 @@ const WeatherStats = (props) => {
     cityContainer
   } = styles
 
+  const {
+    city,
+    country,
+    wind,
+    main,
+    updated_at
+  } = props
+
+  const {
+    temp,
+    humidity,
+    pressure,
+    temp_min,
+    temp_max,
+  } = main
+
 
   //Text will be props.temperature
   return (
     <View style={container}>
       <View style={tempContainer}>
-        <Text style={temperatureNumber}> {`${props.temperature}°F`} </Text>
+        <Text style={temperatureNumber}> {`${temp}°F`} </Text>
       </View>
 
       <View style={cityContainer}>
-        <Text style={cityText}>{ props.city }</Text>
+        <Text style={cityText}>{ city }, { country }</Text>
       </View>
 
       <View style={statsContainer}>
         <View>
-          <Text style={statsText}>Humidity: { props.humidity } </Text>
-          <Text style={statsText}>Humidity: { props.humidity } </Text>
-          <Text style={statsText}>Humidity: { props.humidity } </Text>
+          <Text style={statsText}>Humidity: { humidity } </Text>
+          <Text style={statsText}>Wind: { wind } </Text>
+          <Text style={statsText}>Pressure: { pressure } </Text>
         </View>
         <View>
-          <Text style={statsText}>Humidity: { props.humidity } </Text>
-          <Text style={statsText}>Humidity: { props.humidity } </Text>
-          <Text style={statsText}>Humidity: { props.humidity } </Text>
+          <Text style={statsText}>Max: { temp_max } </Text>
+          <Text style={statsText}>Min: { temp_min } </Text>
+          <Text style={statsText}>Updated: { updated_at } </Text>
         </View>
       </View>
     </View>

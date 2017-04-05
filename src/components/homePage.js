@@ -15,7 +15,7 @@ import {
 } from "./shared"
 
 
-import { getGif, getWeather } from "../actions"
+import { getWeather } from "../actions"
 
 
 class HomePage extends Component {
@@ -23,17 +23,13 @@ class HomePage extends Component {
     super(props)
   }
 
-  componentWillMount() {
-    this.props.getWeather()
-    this.props.getGif()
-  }
-
   // Render Gif or Spinner to avoid spacing and undefined error from async
   renderGif() {
-    if (this.props.currentGif) {
+    if (this.props.currentWeather) {
+      // TODO: refactor to account for preference
       return (
         <GifElement
-          currentGif={this.props.currentGif}
+          currentGif={this.props.currentWeather.love_url}
         />
       )
     }
@@ -48,24 +44,33 @@ class HomePage extends Component {
      } = styles
 
      const {
-       temp,
-       humidity
+       city,
+       country,
+       main,
+       wind,
+       updated_at
      } = this.props.currentWeather
 
-    return (
-      <View style={container} >
-          { this.renderGif() }
+     if (!main) {
+       this.props.getWeather()
+       return <Spinner />
+     }
+      return (
+        <View style={container} >
+            { this.renderGif() }
 
-        <WeatherStats
-          city="London"
-          temperature={Math.round(temp) || ""}
-          humidity={humidity}
-        />
+          <WeatherStats
+            city={city}
+            country={country}
+            wind={wind}
+            main={main}
+            updated={updated_at}
+          />
 
-      <Navigation disabledBack />
-    </View>
-    )
-  }
+        <Navigation disabledBack />
+      </View>
+      )
+    }
 }
 
 const styles = EStyleSheet.create({
@@ -77,26 +82,25 @@ const styles = EStyleSheet.create({
 })
 
 HomePage.propTypes = {
-  getGif: React.PropTypes.func.isRequired,
   getWeather: React.PropTypes.func.isRequired
+}
+
+HomePage.getDefaultProps = {
+  currentWeather: { main: null }
 }
 
 
 const mapStateToProps = (state) => {
   return ({
-    currentGif: state.gif.currentGif,
-    gifError: state.gif.gifError,
+    user: state.auth.user,
     routes: state.routes,
     currentWeather: state.weather.currentWeather,
-    weatherError: state.weather.weatherError,
-    cities: state.profile.cities,
-    user: state.auth.user
+    weatherError: state.weather.weatherError
   })
 }
 
 //TODO: Add cities dispatch
 const mapDispatchToProps = {
-  getGif,
   getWeather
 }
 

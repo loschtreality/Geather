@@ -10,10 +10,15 @@ const CityCard = (props) => {
       container,
     } = styles
 
+    const {
+      city,
+      country
+    } = props.cityData
+
     return (
-      <TouchableHighlight onPress={props.onPress(props.city)} style={container} >
+      <TouchableHighlight onPress={() => props.onPress(props.cityData)} style={container} >
         <Text>
-          { props.city }
+          { city }, { country }
         </Text>
       </TouchableHighlight>
     )

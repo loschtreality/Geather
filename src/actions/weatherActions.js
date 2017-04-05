@@ -8,8 +8,7 @@ import { fetchUserContent } from "../utils"
 export const getWeather = () => {
     return (dispatch) => {
         fetchUserContent("weathers").then(result => {
-          const weatherData = result.main
-          dispatch(fetchWeatherSuccess(weatherData))
+          dispatch(fetchWeatherSuccess(result))
         })
         .catch(err => {
           console.error("Error in getWeather action", err)

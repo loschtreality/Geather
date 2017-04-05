@@ -68,14 +68,16 @@ export const postSession = (credentials) => {
     return
   }
 
+  // TODO: Refactor this logic:
   if ("password" in credentials) {
     console.log(credentials, "CREDENTIALS")
     url = "http://127.0.0.1:3000/v1/sessions/email"
     body.user.email = credentials.email
     body.user.password = credentials.password
-  } else if ("g_id" in credentials) {
+  } else if ("email" in credentials) {
+    // CHECK INTO THIS METHOD
     url = "http://127.0.0.1:3000/v1/sessions"
-    body.user.g_id = credentials.g_id
+    body.user.email = credentials.email
     body.user.access_token = credentials.access_token
   } else {
     url = "http://127.0.0.1:3000/v1/sessions/facebook"
@@ -94,11 +96,3 @@ export const postSession = (credentials) => {
   return fetch(url, options)
   .then(getJSON)
 }
-
-
-// Requesting weather
-// const options = {
-//   method: "GET",
-//   headers: headers.set({
-//     "X-Auth-Token": "0901e4b7-06de-43bc-a826-ab4996b4531b"
-//   })

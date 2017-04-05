@@ -31,7 +31,7 @@ export const createUser = (credentials) => {
       postUser(credentials)
       .then(userData => {
         setCredentials({
-          g_id: userData.id,
+          email: userData.email,
           access_token: userData.access_token
         })
         loginUserSuccess(dispatch, userData)
@@ -49,7 +49,7 @@ export const loginUser = (credentials) => {
    postSession(credentials)
      .then(userData => {
        setCredentials({
-         g_id: userData.id,
+         email: userData.email,
          access_token: userData.access_token
        })
        loginUserSuccess(dispatch, userData)

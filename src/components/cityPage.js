@@ -1,5 +1,4 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
+import React, { Component, PropTypes } from "react"
 import {
   View,
 } from "react-native"
@@ -11,16 +10,13 @@ import {
   Navigation
 } from "./shared"
 
-import { getGif } from "../actions"
-
 class CityPage extends Component {
   constructor(props) {
     super(props)
   }
 
   componentWillMount() {
-    //TODO: Fetch Weather, then gif with preference parameters
-    // Make call to rails server
+    // Decide which gif to render. Map preference to props
   }
 
   // Render Gif or Spinner to avoid spacing and undefined error from async
@@ -43,10 +39,24 @@ class CityPage extends Component {
       nav
     } = styles
 
+    const {
+      city,
+      country,
+      main,
+      wind,
+      updated_at
+    } = this.props.cityData
+
     return (
       <View style={container}>
         { this.renderGif() }
-        <WeatherStats temperature="72" city={this.props.city} humidity="30%" />
+        <WeatherStats
+          city={city}
+          country={country}
+          wind={wind}
+          main={main}
+          updated={updated_at}
+        />
         <Navigation style={nav} />
       </View>
     )
@@ -66,15 +76,12 @@ const styles = {
   }
 }
 
-const mapStateToProps = (state) => {
-  return ({
-    currentGif: state.gif.currentGif,
-    gifError: state.gif.gifError,
-  })
+CityPage.propTypes = {
+  cityData: PropTypes.object
 }
 
-const mapDispatchToProps = {
-  getGif
+CityPage.getDefaultProps = {
+  cityData: {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CityPage)
+export default CityPage

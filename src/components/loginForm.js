@@ -8,7 +8,7 @@ import {
  } from "react-native"
 
 
-import { loginUser, createUser, authStateChanged } from "../actions"
+import { loginUser, createUser, authStateChanged, } from "../actions"
 import { Input, Button, FBButton } from "./shared"
 
 import logo from "../assets/images/giphy_logo.png"
@@ -22,10 +22,9 @@ class LoginForm extends Component {
     this.state = { email: "", password: "" }
   }
 
-  componentWillMount = () => {
+  componentDidMount() {
     this.props.authStateChanged()
   }
-
 
   onEmailChange(text) {
     this.setState({ email: text })
@@ -142,7 +141,7 @@ const mapStateToProps = ({ auth }) => {
 const mapDispatchToProps = {
   loginUser,
   createUser,
-  authStateChanged
+  authStateChanged,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
