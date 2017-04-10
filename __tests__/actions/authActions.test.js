@@ -72,15 +72,15 @@ describe("Auth Actions", () => {
     })
 
     it("creates LOGIN_USER_SUCCESS when post is successful", () => {
-      return store.dispatch(createUser(fakeCreds).then(() => {
+      return store.dispatch(createUser(fakeCreds)).then(() => {
           expect(store.getActions()).toEqual(expectedActions)
-      }))
+      })
     })
 
     it("stores the email an access token in async storage", () => {
-      return store.dispatch(createUser(fakeCreds).then(() => {
+      return store.dispatch(createUser(fakeCreds)).then(() => {
           expect(setCredentials).toHaveBeenCalled()
-      }))
+      })
     })
 
     it("creates LOGIN_USER_FAIL when post is unsuccessful", () => {
@@ -88,9 +88,9 @@ describe("Auth Actions", () => {
         message: "something went wrong"
       })
 
-      return store.dispatch(loginUser(fakeCreds).then(() => {
+      return store.dispatch(loginUser(fakeCreds)).then(() => {
         expect(store.getActions()).toEqual(expectedErrorAction)
-      }))
+      })
     })
   })
 
@@ -108,15 +108,15 @@ describe("Auth Actions", () => {
       })
 
       it("creates LOGIN_USER_SUCCESS when post is successful", () => {
-          return store.dispatch(loginUser(fakeCreds).then(() => {
+          return store.dispatch(loginUser(fakeCreds)).then(() => {
               expect(store.getActions()).toEqual(expectedActions)
-          }))
+          })
       })
 
       it("stores the email an access token in async storage", () => {
-        return store.dispatch(loginUser(fakeCreds).then(() => {
+        return store.dispatch(loginUser(fakeCreds)).then(() => {
             expect(setCredentials).toHaveBeenCalled()
-        }))
+        })
       })
 
       it("creates LOGIN_USER_FAIL when an error is received", () => {
@@ -125,9 +125,9 @@ describe("Auth Actions", () => {
           message: "unauthorized user"
         })
 
-        return store.dispatch(loginUser(invalidCreds).then(() => {
+        return store.dispatch(loginUser(invalidCreds)).then(() => {
           expect(store.getActions()).toEqual(expectedErrorAction)
-        }))
+        })
       })
   })
 
@@ -138,31 +138,31 @@ describe("Auth Actions", () => {
     })
 
     xit("creates LOGIN_USER_SUCCESS if local storage post data successful", () => {
-      return store.dispatch(authStateChanged().then(() => {
+      return store.dispatch(authStateChanged()).then(() => {
 
-      }))
+      })
     })
   })
 
   describe("logoutUser", () => {
     let logoutAction
     beforeEach(() => {
-      store = {
+      store = mockStore({
         auth: {
           user: {
             email: "test@test.com",
             access_token: "apsdofia-9sd8f-98h2f9ught"
           }
         }
-      }
+      })
 
       logoutAction = [{ type: LOGOUT_USER }]
     })
 
     it("creates LOGOUT_USER when called", () => {
-      return store.dispatch(logoutUser().then(() => {
+      return store.dispatch(logoutUser()).then(() => {
         expect(store.getActions()).toEqual(logoutAction)
-      }))
+      })
     })
 
     xit("clears local storage of geather_data", () => {})

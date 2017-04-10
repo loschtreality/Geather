@@ -2,7 +2,7 @@ import React from "react"
 import renderer from "react-test-renderer"
 import { LoginForm } from "../../src/components/loginForm"
 
-xdescribe("<LoginForm />", () => {
+describe("<LoginForm />", () => {
   let authStateChanged
   let loginUser
   let createUser
@@ -34,7 +34,7 @@ xdescribe("<LoginForm />", () => {
     })
     xdescribe("creating an account", () => {
       it("calls emailCreate when the create button is pressed", () => {
-
+        
       })
 
       it("clears the input fields", () => {

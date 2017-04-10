@@ -1,3 +1,5 @@
+/* @flow */
+
 import { AsyncStorage } from "react-native"
 
 // Fetch function helpers
@@ -13,22 +15,23 @@ const getJSON = (response) => {
   return response.json()
 }
 
-export const fetchContentData = (url, options = {}) => {
+export const fetchContentData = (url: string, options = {}) => {
   return fetch(url, options)
   .then(checkStatus)
   .then(getJSON)
 }
 
-export const fetchUserContent = async (routeEndpoint /* weathers || gif */) => {
+export const fetchUserContent = async (routeEndpoint: string /* weathers || gif */) => {
   let storageData = await AsyncStorage.getItem("geather_data")
   storageData = JSON.parse(storageData)
   return new Promise((resolve, reject) => {
+    const headers = new Headers()
+    headers.append("X-Auth-Token", storageData.access_token)
     const options = {
       method: "GET",
-      headers: new Headers({
-        "X-Auth-Token": storageData.access_token
-      }),
+      headers
     }
+
     fetchContentData(`http://127.0.0.1:3000/v1/${routeEndpoint}`, options)
     .then(contentData => {
       resolve(contentData)
@@ -49,11 +52,11 @@ export const postUser = (credentials) => {
   body.user.email = credentials.email
   body.user.password = credentials.password
 
+  const headers = new Headers()
+  headers.append("Content-Type", "application/json")
   const options = {
     method: "POST",
-    headers: new Headers({
-      "Content-Type": "application/json"
-    }),
+    headers,
     body: JSON.stringify(body)
   }
 
@@ -70,7 +73,6 @@ export const postSession = (credentials) => {
 
   // TODO: Refactor this logic:
   if ("password" in credentials) {
-    console.log(credentials, "CREDENTIALS")
     url = "http://127.0.0.1:3000/v1/sessions/email"
     body.user.email = credentials.email
     body.user.password = credentials.password
@@ -85,11 +87,11 @@ export const postSession = (credentials) => {
     body.user.access_token = credentials.access_token
   }
 
+  const headers = new Headers()
+  headers.append("Content-Type", "application/json")
   const options = {
     method: "POST",
-    headers: new Headers({
-      "Content-Type": "application/json"
-    }),
+    headers,
     body: JSON.stringify(body)
   }
 

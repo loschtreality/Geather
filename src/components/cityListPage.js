@@ -118,7 +118,8 @@ const styles = EStyleSheet.create({
 })
 
 CityListPage.propTypes = {
-
+  // addCity: React.PropTypes.func.isRequired,
+  // removeCity: React.PropTypes.func.isRequired
 }
 
 CityListPage.getDefaultProps = {
@@ -132,9 +133,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  // add city
-  // remove city
-  // go to selected city
+  // addCity,
+  // removeCity
 }
 
 export { CityListPage }

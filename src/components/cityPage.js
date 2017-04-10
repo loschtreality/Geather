@@ -84,4 +84,5 @@ CityPage.getDefaultProps = {
   cityData: {}
 }
 
+export { CityPage }
 export default CityPage
