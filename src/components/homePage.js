@@ -105,4 +105,5 @@ const mapDispatchToProps = {
 }
 
 
+export { HomePage }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

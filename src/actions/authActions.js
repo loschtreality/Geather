@@ -17,15 +17,15 @@ import {
 } from "../utils"
 
 
-const setCredentials = (userData) => {
+const setCredentials = (userData: Object): void => {
   AsyncStorage.setItem("geather_data", JSON.stringify(userData))
-    .catch(err => console.log(`There was a huge error with setting token ${err}`))
+    .catch(err => console.log(`There was an error with setting token ${err}`))
     .done()
 }
 
-export const createUser = (credentials) => {
+export const createUser = (credentials: Object) => {
     // refactor actions to handle error dispatching better
-    return (dispatch) => {
+    return (dispatch): void => {
       dispatch({ type: LOGIN_USER })
 
       postUser(credentials)
@@ -41,8 +41,8 @@ export const createUser = (credentials) => {
 }
 
 // Routing logic for Facebook vs Email in Utils index
-export const loginUser = (credentials) => {
- return (dispatch) => {
+export const loginUser = (credentials: Object) => {
+ return (dispatch): void => {
    dispatch({ type: LOGIN_USER })
 
    // Set routes in env vars for production / development
@@ -61,7 +61,7 @@ export const loginUser = (credentials) => {
  }
 
 export const authStateChanged = () => {
-  return async (dispatch) => {
+  return async (dispatch): void => {
     const userData = await AsyncStorage.getItem("geather_data")
     if (userData) {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: JSON.parse(userData) })
@@ -73,7 +73,7 @@ export const authStateChanged = () => {
 }
 
 export const logoutUser = () => {
-  return (dispatch) => {
+  return (dispatch): void => {
     AsyncStorage.removeItem("geather_data")
     LoginManager.logOut()
     dispatch({ type: LOGOUT_USER })
@@ -81,7 +81,7 @@ export const logoutUser = () => {
   }
 }
 
-const loginUserSuccess = (dispatch, user) => {
+const loginUserSuccess = (dispatch, user: Object): void => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
@@ -90,7 +90,7 @@ const loginUserSuccess = (dispatch, user) => {
   Actions.main()
 }
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = (dispatch): void => {
   dispatch({
     type: LOGIN_USER_FAIL
   })

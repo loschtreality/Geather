@@ -111,4 +111,5 @@ const mapDispatchToProps = {
  logoutUser
 }
 
+export { ProfilePage }
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage)

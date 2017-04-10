@@ -34,7 +34,7 @@ class LoginForm extends Component {
     this.setState({ password: text })
   }
 
-  onButtonPress() {
+  emailLogin() {
     const { email, password } = this.state
     this.setState({ password: "" })
     this.props.loginUser({ email, password })
@@ -80,7 +80,7 @@ class LoginForm extends Component {
             value={this.props.password}
           />
 
-          <Button text="Login" onPress={this.onButtonPress.bind(this)} />
+          <Button text="Login" onPress={this.emailLogin.bind(this)} />
 
           <Button
             text="Create Account"
@@ -126,6 +126,7 @@ const styles = EStyleSheet.create({
 
 LoginForm.propTypes = {
   loginUser: React.PropTypes.func.isRequired,
+  createUser: React.PropTypes.func.isRequired,
   authStateChanged: React.PropTypes.func.isRequired
 }
 
@@ -144,4 +145,5 @@ const mapDispatchToProps = {
   authStateChanged,
 }
 
+export { LoginForm } // required for testing
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

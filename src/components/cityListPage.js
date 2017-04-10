@@ -117,6 +117,13 @@ const styles = EStyleSheet.create({
   }
 })
 
+CityListPage.propTypes = {
+
+}
+
+CityListPage.getDefaultProps = {
+  cities: []
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -130,4 +137,5 @@ const mapDispatchToProps = {
   // go to selected city
 }
 
+export { CityListPage }
 export default connect(mapStateToProps, mapDispatchToProps)(CityListPage)
