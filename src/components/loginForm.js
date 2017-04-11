@@ -70,14 +70,14 @@ class LoginForm extends Component {
           <Input
             placeholder="Email"
             onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
+            value={this.state.email}
           />
 
           <Input
             secureTextEntry
             placeholder="password"
             onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
+            value={this.state.password}
           />
 
           <Button text="Login" onPress={this.emailLogin.bind(this)} />
@@ -127,7 +127,8 @@ const styles = EStyleSheet.create({
 LoginForm.propTypes = {
   loginUser: React.PropTypes.func.isRequired,
   createUser: React.PropTypes.func.isRequired,
-  authStateChanged: React.PropTypes.func.isRequired
+  authStateChanged: React.PropTypes.func.isRequired,
+  error: React.PropTypes.string
 }
 
 const mapStateToProps = ({ auth }) => {

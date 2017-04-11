@@ -35,23 +35,20 @@ These are tentative instructions for installation:
 - [x] oAuth for Facebook iOS
 - [ ] oAuth for Facebook Android
 - [ ] Complete login testing
-- [ ] Navigation Bar
+- [x] Navigation Bar
+- [ ] City Search
 - [ ] Profile
-- [ ] Logout
-- [ ] DB config for weather / gif storing
+- [x] Logout
+- [x] DB config for weather / gif storing
 - [ ] Create overlaying spinner
 - [ ] Custom Components
-- [ ] Fetch all data on login
+- [x] Fetch all data on login
 - [ ] Custom start up page
 
 ## Issues
 
 1. Android denies network connections to non https sources, including localhost and local IP
-2. Jest modules are not found, despite being installed
+2. Mocks for ES6 functions are not defined
 3. Preload height of gif is incorrect, jumps on load
 4. Upon an unsuccessful return from the server, the app navigates to a new page
-
-
-## Notes
-
-1. Disable reoccurring fetching on landing page by refactoring server call
+5. Jest is unable to find components in select files

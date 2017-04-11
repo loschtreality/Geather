@@ -1,89 +1,59 @@
-// import firebase from "firebase"
+/* @flow */
+
+import { deleteCity, postCity } from "../utils"
 
 import {
-  PATCH_PREFERENCE,
+  // PATCH_PREFERENCE,
+  // RECEIVE_PREFERENCES
   REMOVE_CITY,
   ADD_CITY,
-  RECEIVE_PREFERENCES
 } from "./types"
 
+// Cities
+export const addCity = (city: string) => {
+  return (dispatch): void => {
+    postCity(city).then((cityData) => {
+      dispatch(postCitySuccess(cityData))
+    })
+  }
+}
 
-// Weather preferences
-// export const fetchPreferences = () => {
-//   const { currentUser } = firebase.auth()
-//
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/preferences`)
-//     .on("value", (snapshot) => {
-//       dispatch(receivePreferencesSuccess(snapshot.val()))
-//     })
-//   }
-// }
+export const removeCity = (city: Object) => {
+  return (dispatch): void => {
+    deleteCity(city).then(() => {
+      dispatch(deleteCitySuccess(city))
+    })
+  }
+}
 
-// export const postPreferences = (preferences) => {
-//   const { currentUser } = firebase.auth()
-//
-//   firebase.database().ref(`/users/${currentUser.uid}/preferences`)
-//   .push({ preferences })
-// }
-
-
-// export const patchPreferences = (/* changes */) => {
-//   const { currentUser } = firebase.auth()
-//
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/preferences`)
-//     // some patch method
-//     .then(() => dispatch(/* method with changes */))
-//   }
-// }
-
-// City list
-// export const postCity = (city) => {
-//   const { currentUser } = firebase.auth()
-//
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/preferences/cities`)
-//     .push(city)
-//     // may need to find firebase method for this
-//     .then(cityInfo => dispatch(postCitySuccess(cityInfo)))
-//   }
-// }
-//
-// export const deleteCity = (city) => {
-//   const { currentUser } = firebase.auth()
-//
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/preferences/cities`)
-//   }
-// }
-
+// Prefrences
+// export const patchPreference = (options) => {}
 
 // Dispatches
-export const preferencePatchSuccess = (preferences) => {
-  return {
-    action: PATCH_PREFERENCE,
-    payload: preferences
-  }
-}
+// const preferencePatchSuccess = (preferences) => {
+//   return {
+//     action: PATCH_PREFERENCE,
+//     payload: preferences
+//   }
+// }
+//
+// const receivePreferencesSuccess = (preferences) => {
+//   return {
+//     aciton: RECEIVE_PREFERENCES,
+//     payload: preferences
+//   }
+// }
 
-export const receivePreferencesSuccess = (preferences) => {
+const postCitySuccess = (city) => {
   return {
-    aciton: RECEIVE_PREFERENCES,
-    payload: preferences
-  }
-}
-
-export const postCitySuccess = (city) => {
-  return {
-    action: ADD_CITY,
+    type: ADD_CITY,
     payload: city
   }
 }
 
-export const deleteCitySuccess = (city) => {
+const deleteCitySuccess = (city) => {
   return {
-    action: REMOVE_CITY,
+    type: REMOVE_CITY,
     payload: city
   }
 }

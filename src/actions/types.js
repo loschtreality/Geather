@@ -1,7 +1,3 @@
-// Giphy API
-export const ERROR_GIF = "ERROR_GIF"
-export const RECEIVE_GIF = "RECEIVE_GIF"
-
 // Weather API
 export const ERROR_WEATHER = "ERROR_WEATHER"
 export const RECEIVE_WEATHER = "RECEIVE_WEATHER"

@@ -11,6 +11,10 @@ import {
   TouchableHighlight
 } from "react-native"
 
+import {
+  addCity,
+  removeCity
+} from "../actions"
 
 import {
   CityCard,
@@ -29,19 +33,32 @@ class CityListPage extends React.Component {
     this.changeScene = this.changeScene.bind(this)
   }
 
+  componentWillReceiveProps(nextProps) {
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+    this.setState({
+      dataSource: ds.cloneWithRows(nextProps.cities)
+    })
+  }
+
   changeScene(cityData) {
       Actions.selectedCity({ cityData })
   }
 
-  removeCity(rowData) {
-    console.log("removed", rowData)
+  addCityToList(selectedCity) {
+    console.log("added", selectedCity)
+    // do some string parsing here
+    // this.props.addCity(city: string || array)
+  }
+
+  removeCityFromList(rowData: Object) {
+    this.props.removeCity(rowData)
   }
 
   renderRow(rowData) {
     const swipeBtns = [{
       text: "Delete",
       style: { backgroundColor: "red" },
-      onPress: () => this.removeCity(rowData.city) // dispatch action here
+      onPress: () => this.removeCityFromList(rowData) // dispatch action here
     }]
 
     return (
@@ -118,8 +135,8 @@ const styles = EStyleSheet.create({
 })
 
 CityListPage.propTypes = {
-  // addCity: React.PropTypes.func.isRequired,
-  // removeCity: React.PropTypes.func.isRequired
+  addCity: React.PropTypes.func.isRequired,
+  removeCity: React.PropTypes.func.isRequired
 }
 
 CityListPage.getDefaultProps = {
@@ -133,8 +150,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  // addCity,
-  // removeCity
+  addCity,
+  removeCity
 }
 
 export { CityListPage }

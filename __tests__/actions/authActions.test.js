@@ -36,7 +36,6 @@ describe("Auth Actions", () => {
       email: "test@test.com",
       password: "password"
     }
-    store = mockStore({ auth: {} })
     expectedActions = [
       {
         type: LOGIN_USER

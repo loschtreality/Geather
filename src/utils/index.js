@@ -98,3 +98,50 @@ export const postSession = (credentials) => {
   return fetch(url, options)
   .then(getJSON)
 }
+
+export const deleteCity = async (city: { id: number, city: string, country: string }) => {
+  let storageData = await AsyncStorage.getItem("geather_data")
+  storageData = JSON.parse(storageData)
+
+  const url = "http://127.0.0.1:3000/v1/userweather"
+  const headers = new Headers({
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "X-Auth-Token": storageData.access_token
+  })
+
+  const options = {
+    method: "DELETE",
+    headers,
+    body: JSON.stringify({
+      city: {
+        id: city.id,
+        city: city.city,
+        country: city.country
+      }
+    })
+  }
+
+  return fetch(url, options)
+}
+
+export const postCity = async (city: string) => {
+  //TODO: Refactor, types are not correct
+  let storageData = await AsyncStorage.getItem("geather_data")
+  storageData = JSON.parse(storageData)
+
+  const url = "http://127.0.0.1:3000/v1/userweather"
+  const body = JSON.stringify({ city })
+  const headers = new Headers({
+    "Content-Type": "application/json",
+    "X-Auth-Token": storageData.access_token
+  })
+
+  const options = {
+    method: "POST",
+    headers,
+    body
+  }
+
+  return fetch(url, options)
+}
