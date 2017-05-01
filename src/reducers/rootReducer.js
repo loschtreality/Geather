@@ -1,3 +1,4 @@
+/* @flow */
 import { combineReducers } from "redux"
 import WeatherReducer from "./weatherReducer"
 import SceneReducer from "./sceneReducer"

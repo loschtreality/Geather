@@ -9,7 +9,7 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER,
   LOGOUT_USER
- } from "./types"
+ } from "./actionTypes"
 
 import {
   postSession,
@@ -17,7 +17,7 @@ import {
 } from "../utils"
 
 
-const setCredentials = (userData: Object): void => {
+const setCredentials = (userData: UserData): void => {
   AsyncStorage.setItem("geather_data", JSON.stringify(userData))
     .catch(err => console.log(`There was an error with setting token ${err}`))
     .done()
@@ -25,7 +25,7 @@ const setCredentials = (userData: Object): void => {
 
 export const createUser = (credentials: Object) => {
     // refactor actions to handle error dispatching better
-    return (dispatch): void => {
+    return (dispatch: Dispatch): void => {
       dispatch({ type: LOGIN_USER })
 
       postUser(credentials)
@@ -42,7 +42,7 @@ export const createUser = (credentials: Object) => {
 
 // Routing logic for Facebook vs Email in Utils index
 export const loginUser = (credentials: Object) => {
- return (dispatch): void => {
+ return (dispatch: Dispatch): void => {
    dispatch({ type: LOGIN_USER })
 
    // Set routes in env vars for production / development
@@ -61,7 +61,7 @@ export const loginUser = (credentials: Object) => {
  }
 
 export const authStateChanged = () => {
-  return async (dispatch): void => {
+  return async (dispatch: Dispatch) => {
     const userData = await AsyncStorage.getItem("geather_data")
     if (userData) {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: JSON.parse(userData) })
@@ -73,7 +73,7 @@ export const authStateChanged = () => {
 }
 
 export const logoutUser = () => {
-  return (dispatch): void => {
+  return (dispatch: Dispatch): void => {
     AsyncStorage.removeItem("geather_data")
     LoginManager.logOut()
     dispatch({ type: LOGOUT_USER })
@@ -81,6 +81,7 @@ export const logoutUser = () => {
   }
 }
 
+// TODO: Refactor not to pass dispatch method
 const loginUserSuccess = (dispatch, user: Object): void => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
@@ -90,6 +91,7 @@ const loginUserSuccess = (dispatch, user: Object): void => {
   Actions.main()
 }
 
+// TODO: Refactor not to pass dispatch method
 const loginUserFail = (dispatch): void => {
   dispatch({
     type: LOGIN_USER_FAIL

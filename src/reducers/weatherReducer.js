@@ -1,13 +1,15 @@
+/* @flow */
+
 import {
   RECEIVE_WEATHER,
   ERROR_WEATHER,
   ADD_CITY,
   REMOVE_CITY
-} from "../actions/types"
+} from "../actions/actionTypes"
 
 type State = {
-  currentWeather: Object,
-  cities: Array<Object>,
+  currentWeather: Weather | Object,
+  cities: Array<Weather>,
   weatherError: string
 }
 
@@ -17,9 +19,9 @@ const INIT_STATE = {
   weatherError: ""
 }
 
-const WeatherReducer = (state = INIT_STATE, action): State => {
+// NOTE: Change action type to type which is imported from types.js
+const WeatherReducer = (state: State = INIT_STATE, action: Object): State => {
   Object.freeze(state)
-  // option to use Object.assign({}, state, { payload })
   switch (action.type) {
     case RECEIVE_WEATHER:
       return { ...state, currentWeather: action.payload[0], cities: action.payload }
@@ -35,7 +37,7 @@ const WeatherReducer = (state = INIT_STATE, action): State => {
 }
 
 const filterCity = (state: State, payload: Object): State => {
-  const updatedCities = state.cities.filter((city) => {
+  const updatedCities: Array<Weather> = state.cities.filter((city) => {
     return city.city !== payload.city
   })
 

@@ -7,11 +7,11 @@ import {
   // RECEIVE_PREFERENCES
   REMOVE_CITY,
   ADD_CITY,
-} from "./types"
+} from "./actionTypes"
 
 // Cities
 export const addCity = (city: string) => {
-  return (dispatch): void => {
+  return (dispatch: Dispatch): void => {
     postCity(city).then((cityData) => {
       dispatch(postCitySuccess(cityData))
     })
@@ -19,7 +19,7 @@ export const addCity = (city: string) => {
 }
 
 export const removeCity = (city: Object) => {
-  return (dispatch): void => {
+  return (dispatch: Dispatch): void => {
     deleteCity(city).then(() => {
       dispatch(deleteCitySuccess(city))
     })

@@ -17,11 +17,22 @@ import {
 
 import { getWeather } from "../actions"
 
-
+// <DefaultProps, Props, State>
+// <void, {} (or Object), void> for no default state, props, state
 class HomePage extends Component {
   constructor(props) {
     super(props)
   }
+
+  props: {
+    user: Object, // User
+    getWeather: () => void,
+  }
+
+  defaultProps: {
+    currentWeather: { main: null }
+  }
+
 
   // Render Gif or Spinner to avoid spacing and undefined error from async
   renderGif() {
@@ -80,15 +91,6 @@ const styles = EStyleSheet.create({
     justifyContent: "center",
   }
 })
-
-HomePage.propTypes = {
-  getWeather: React.PropTypes.func.isRequired
-}
-
-HomePage.getDefaultProps = {
-  currentWeather: { main: null }
-}
-
 
 const mapStateToProps = (state) => {
   return ({

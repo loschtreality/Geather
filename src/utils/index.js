@@ -15,7 +15,7 @@ const getJSON = (response) => {
   return response.json()
 }
 
-export const fetchContentData = (url: string, options = {}) => {
+export const fetchContentData = (url: string, options: Object = {}) => {
   return fetch(url, options)
   .then(checkStatus)
   .then(getJSON)
@@ -41,9 +41,9 @@ export const fetchUserContent = async (routeEndpoint: string /* weathers || gif 
   })
 }
 
-export const postUser = (credentials) => {
+export const postUser = (credentials: UserData) => {
   if (!credentials) {
-    console.warn("NO CREDENTIALS IN POST USER")
+    console.error("NO CREDENTIALS IN POST USER")
     return
   }
   const body = { user: {} }
@@ -63,7 +63,7 @@ export const postUser = (credentials) => {
   return fetch(url, options)
 }
 
-export const postSession = (credentials) => {
+export const postSession = (credentials: UserData) => {
   const body = { user: {} }
   let url
   if (!credentials) {
@@ -125,6 +125,7 @@ export const deleteCity = async (city: { id: number, city: string, country: stri
   return fetch(url, options)
 }
 
+// TODO: Refactor input to match deleteCity
 export const postCity = async (city: string) => {
   //TODO: Refactor, types are not correct
   let storageData = await AsyncStorage.getItem("geather_data")

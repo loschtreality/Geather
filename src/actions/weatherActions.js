@@ -1,12 +1,26 @@
+/* @flow */
+
 import {
   RECEIVE_WEATHER,
   ERROR_WEATHER
- } from "./types"
+ } from "./actionTypes"
 
 import { fetchUserContent } from "../utils"
 
+type WeatherSuccess = {
+  type: string,
+  payload: Weather
+}
+
+type WeatherFail = {
+  type: string,
+  payload: string
+}
+
+type Action = WeatherSuccess | WeatherFail
+
 export const getWeather = () => {
-    return (dispatch) => {
+    return (dispatch: Dispatch) => {
         fetchUserContent("weathers").then(result => {
           dispatch(fetchWeatherSuccess(result))
         })
@@ -17,14 +31,14 @@ export const getWeather = () => {
     }
 }
 
-export const fetchWeatherSuccess = (weatherData) => {
+export const fetchWeatherSuccess = (weatherData: Weather): Action => {
   return {
     type: RECEIVE_WEATHER,
     payload: weatherData
   }
 }
 
-export const fetchWeatherFail = (errorMessage) => {
+export const fetchWeatherFail = (errorMessage: string): Action => {
   return {
     type: ERROR_WEATHER,
     payload: errorMessage

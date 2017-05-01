@@ -1,13 +1,22 @@
+/* @flow */
+
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
   LOGOUT_USER
- } from "../actions/types"
+ } from "../actions/actionTypes"
 
-const INIT_STATE = { error: "", user: null, loading: false }
+ type AuthState = {
+   error: string,
+   user: User,
+   loading: boolean
+ }
 
-const AuthReducer = (state = INIT_STATE, action) => {
+// NOTE: User was null, may need to adjust other code to account for this
+const INIT_STATE = { error: "", user: {}, loading: false }
+
+const AuthReducer = (state: AuthState = INIT_STATE, action: Object /* Action */): AuthState => {
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, loading: true, error: "" }

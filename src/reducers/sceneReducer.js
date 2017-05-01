@@ -1,3 +1,4 @@
+/* @flow */
 import { ActionConst } from "react-native-router-flux"
 
 const initState = { scene: {} }

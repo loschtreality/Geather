@@ -1,8 +1,10 @@
+/* @flow */
+
 import {
   PATCH_PREFERENCE,
   ADD_CITY,
   REMOVE_CITY
-} from "../actions/types"
+} from "../actions/actionTypes"
 
 // hot: "love",
 // warm: "like",
